@@ -16,6 +16,7 @@
 		6DAB8FE224630746003B5C54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DAB8FE024630746003B5C54 /* LaunchScreen.storyboard */; };
 		6DAB8FED24630746003B5C54 /* MiniChallenge2_Kelompok9Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FEC24630746003B5C54 /* MiniChallenge2_Kelompok9Tests.swift */; };
 		6DAB8FF824630746003B5C54 /* MiniChallenge2_Kelompok9UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FF724630746003B5C54 /* MiniChallenge2_Kelompok9UITests.swift */; };
+		B0A29B772464F21900032F91 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A29B762464F21900032F91 /* Onboarding.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		6DAB8FF324630746003B5C54 /* MiniChallenge2_Kelompok9UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiniChallenge2_Kelompok9UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DAB8FF724630746003B5C54 /* MiniChallenge2_Kelompok9UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniChallenge2_Kelompok9UITests.swift; sourceTree = "<group>"; };
 		6DAB8FF924630746003B5C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0A29B762464F21900032F91 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				6DAB8FD424630745003B5C54 /* SceneDelegate.swift */,
 				6DAB8FD624630745003B5C54 /* ViewController.swift */,
 				6DAB8FD824630745003B5C54 /* Main.storyboard */,
+				B0A29B762464F21900032F91 /* Onboarding.storyboard */,
 				6DAB8FDE24630746003B5C54 /* Assets.xcassets */,
 				6DAB8FE024630746003B5C54 /* LaunchScreen.storyboard */,
 				6DAB8FE324630746003B5C54 /* Info.plist */,
@@ -238,6 +241,7 @@
 				6DAB8FE224630746003B5C54 /* LaunchScreen.storyboard in Resources */,
 				6DAB8FDF24630746003B5C54 /* Assets.xcassets in Resources */,
 				6DAB8FDA24630745003B5C54 /* Main.storyboard in Resources */,
+				B0A29B772464F21900032F91 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
