@@ -18,6 +18,8 @@
 		6DAB8FF824630746003B5C54 /* MiniChallenge2_Kelompok9UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FF724630746003B5C54 /* MiniChallenge2_Kelompok9UITests.swift */; };
 		6DEB679724713A5F00A85B4A /* mainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB679624713A5F00A85B4A /* mainPage.storyboard */; };
 		6DEB679D24713AFE00A85B4A /* mainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */; };
+		B059727124714B1400508E9E /* detailPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B059727024714B1400508E9E /* detailPage.storyboard */; };
+		B059727324714B3600508E9E /* detailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059727224714B3600508E9E /* detailPageViewController.swift */; };
 		B0A29B772464F21900032F91 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A29B762464F21900032F91 /* Onboarding.storyboard */; };
 		B0A29B792464F65300032F91 /* HelperExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A29B782464F65300032F91 /* HelperExtension.swift */; };
 		B0A29B7B2464F8C300032F91 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A29B7A2464F8C300032F91 /* OnboardingVC.swift */; };
@@ -59,6 +61,8 @@
 		6DAB8FF924630746003B5C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DEB679624713A5F00A85B4A /* mainPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = mainPage.storyboard; sourceTree = "<group>"; };
 		6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainPageViewController.swift; sourceTree = "<group>"; };
+		B059727024714B1400508E9E /* detailPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = detailPage.storyboard; sourceTree = "<group>"; };
+		B059727224714B3600508E9E /* detailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailPageViewController.swift; sourceTree = "<group>"; };
 		B0A29B762464F21900032F91 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		B0A29B782464F65300032F91 /* HelperExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperExtension.swift; sourceTree = "<group>"; };
 		B0A29B7A2464F8C300032F91 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 		6DAB8FD124630745003B5C54 /* MiniChallenge2_Kelompok9 */ = {
 			isa = PBXGroup;
 			children = (
+				B059726F24714AD900508E9E /* Detail Page Folder */,
 				6DEB679924713A9F00A85B4A /* Main Page Folder */,
 				6DEB679824713A6800A85B4A /* Onboarding Folder */,
 				6DAB8FD224630745003B5C54 /* AppDelegate.swift */,
@@ -163,6 +168,15 @@
 				6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */,
 			);
 			path = "Main Page Folder";
+			sourceTree = "<group>";
+		};
+		B059726F24714AD900508E9E /* Detail Page Folder */ = {
+			isa = PBXGroup;
+			children = (
+				B059727024714B1400508E9E /* detailPage.storyboard */,
+				B059727224714B3600508E9E /* detailPageViewController.swift */,
+			);
+			path = "Detail Page Folder";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +287,7 @@
 				6DAB8FDF24630746003B5C54 /* Assets.xcassets in Resources */,
 				6DEB679724713A5F00A85B4A /* mainPage.storyboard in Resources */,
 				6DAB8FDA24630745003B5C54 /* Main.storyboard in Resources */,
+				B059727124714B1400508E9E /* detailPage.storyboard in Resources */,
 				B0A29B772464F21900032F91 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +318,7 @@
 				6DAB8FD724630745003B5C54 /* ViewController.swift in Sources */,
 				B0A29B7B2464F8C300032F91 /* OnboardingVC.swift in Sources */,
 				6DAB8FDD24630745003B5C54 /* MiniChallenge2_Kelompok9.xcdatamodeld in Sources */,
+				B059727324714B3600508E9E /* detailPageViewController.swift in Sources */,
 				6DAB8FD324630745003B5C54 /* AppDelegate.swift in Sources */,
 				B0A29B792464F65300032F91 /* HelperExtension.swift in Sources */,
 				6DAB8FD524630745003B5C54 /* SceneDelegate.swift in Sources */,
