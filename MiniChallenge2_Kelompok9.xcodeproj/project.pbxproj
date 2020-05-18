@@ -18,6 +18,10 @@
 		6DAB8FF824630746003B5C54 /* MiniChallenge2_Kelompok9UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FF724630746003B5C54 /* MiniChallenge2_Kelompok9UITests.swift */; };
 		6DEB679724713A5F00A85B4A /* mainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB679624713A5F00A85B4A /* mainPage.storyboard */; };
 		6DEB679D24713AFE00A85B4A /* mainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */; };
+		A178DE8A2468F377009DDAED /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A178DE892468F377009DDAED /* SettingVC.swift */; };
+		A1B4C8212470154F002FAD5C /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1B4C8202470154F002FAD5C /* WebView.storyboard */; };
+		A1B4C823247016DA002FAD5C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B4C822247016DA002FAD5C /* WebViewController.swift */; };
+		A1B4C8262470243B002FAD5C /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1B4C8242470243B002FAD5C /* Setting.storyboard */; };
 		B059727124714B1400508E9E /* detailPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B059727024714B1400508E9E /* detailPage.storyboard */; };
 		B059727324714B3600508E9E /* detailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059727224714B3600508E9E /* detailPageViewController.swift */; };
 		B05972752472506E00508E9E /* OnboardSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05972742472506E00508E9E /* OnboardSlide.swift */; };
@@ -63,6 +67,10 @@
 		6DAB8FF924630746003B5C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DEB679624713A5F00A85B4A /* mainPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = mainPage.storyboard; sourceTree = "<group>"; };
 		6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainPageViewController.swift; sourceTree = "<group>"; };
+		A178DE892468F377009DDAED /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		A1B4C8202470154F002FAD5C /* WebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebView.storyboard; sourceTree = "<group>"; };
+		A1B4C822247016DA002FAD5C /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		A1B4C8252470243B002FAD5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Setting.storyboard; sourceTree = "<group>"; };
 		B059727024714B1400508E9E /* detailPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = detailPage.storyboard; sourceTree = "<group>"; };
 		B059727224714B3600508E9E /* detailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailPageViewController.swift; sourceTree = "<group>"; };
 		B05972742472506E00508E9E /* OnboardSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardSlide.swift; sourceTree = "<group>"; };
@@ -121,6 +129,8 @@
 		6DAB8FD124630745003B5C54 /* MiniChallenge2_Kelompok9 */ = {
 			isa = PBXGroup;
 			children = (
+				A156AA8C24723AA800F34C97 /* WebView Page Folder */,
+				A156AA8B24723A9300F34C97 /* Setting Page Folder */,
 				B059726F24714AD900508E9E /* Detail Page Folder */,
 				6DEB679924713A9F00A85B4A /* Main Page Folder */,
 				6DEB679824713A6800A85B4A /* Onboarding Folder */,
@@ -174,6 +184,24 @@
 				6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */,
 			);
 			path = "Main Page Folder";
+			sourceTree = "<group>";
+		};
+		A156AA8B24723A9300F34C97 /* Setting Page Folder */ = {
+			isa = PBXGroup;
+			children = (
+				A1B4C8242470243B002FAD5C /* Setting.storyboard */,
+				A178DE892468F377009DDAED /* SettingVC.swift */,
+			);
+			path = "Setting Page Folder";
+			sourceTree = "<group>";
+		};
+		A156AA8C24723AA800F34C97 /* WebView Page Folder */ = {
+			isa = PBXGroup;
+			children = (
+				A1B4C8202470154F002FAD5C /* WebView.storyboard */,
+				A1B4C822247016DA002FAD5C /* WebViewController.swift */,
+			);
+			path = "WebView Page Folder";
 			sourceTree = "<group>";
 		};
 		B059726F24714AD900508E9E /* Detail Page Folder */ = {
@@ -294,8 +322,10 @@
 				6DAB8FDF24630746003B5C54 /* Assets.xcassets in Resources */,
 				6DEB679724713A5F00A85B4A /* mainPage.storyboard in Resources */,
 				6DAB8FDA24630745003B5C54 /* Main.storyboard in Resources */,
+				A1B4C8212470154F002FAD5C /* WebView.storyboard in Resources */,
 				B059727124714B1400508E9E /* detailPage.storyboard in Resources */,
 				B0A29B772464F21900032F91 /* Onboarding.storyboard in Resources */,
+				A1B4C8262470243B002FAD5C /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +353,8 @@
 				6DEB679D24713AFE00A85B4A /* mainPageViewController.swift in Sources */,
 				B05972752472506E00508E9E /* OnboardSlide.swift in Sources */,
 				B0A29B7D2465193F00032F91 /* UtilityAnimation.swift in Sources */,
+				A178DE8A2468F377009DDAED /* SettingVC.swift in Sources */,
+				A1B4C823247016DA002FAD5C /* WebViewController.swift in Sources */,
 				6DAB8FD724630745003B5C54 /* ViewController.swift in Sources */,
 				B0A29B7B2464F8C300032F91 /* OnboardingVC.swift in Sources */,
 				6DAB8FDD24630745003B5C54 /* MiniChallenge2_Kelompok9.xcdatamodeld in Sources */,
@@ -379,6 +411,14 @@
 				6DAB8FE124630746003B5C54 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A1B4C8242470243B002FAD5C /* Setting.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1B4C8252470243B002FAD5C /* Base */,
+			);
+			name = Setting.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
