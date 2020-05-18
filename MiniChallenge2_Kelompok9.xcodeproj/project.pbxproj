@@ -20,6 +20,8 @@
 		6DEB679D24713AFE00A85B4A /* mainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */; };
 		B059727124714B1400508E9E /* detailPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B059727024714B1400508E9E /* detailPage.storyboard */; };
 		B059727324714B3600508E9E /* detailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059727224714B3600508E9E /* detailPageViewController.swift */; };
+		B05972752472506E00508E9E /* OnboardSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05972742472506E00508E9E /* OnboardSlide.swift */; };
+		B0597277247250C600508E9E /* onboardSlide.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0597276247250C600508E9E /* onboardSlide.xib */; };
 		B0A29B772464F21900032F91 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A29B762464F21900032F91 /* Onboarding.storyboard */; };
 		B0A29B792464F65300032F91 /* HelperExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A29B782464F65300032F91 /* HelperExtension.swift */; };
 		B0A29B7B2464F8C300032F91 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A29B7A2464F8C300032F91 /* OnboardingVC.swift */; };
@@ -63,6 +65,8 @@
 		6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainPageViewController.swift; sourceTree = "<group>"; };
 		B059727024714B1400508E9E /* detailPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = detailPage.storyboard; sourceTree = "<group>"; };
 		B059727224714B3600508E9E /* detailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailPageViewController.swift; sourceTree = "<group>"; };
+		B05972742472506E00508E9E /* OnboardSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardSlide.swift; sourceTree = "<group>"; };
+		B0597276247250C600508E9E /* onboardSlide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = onboardSlide.xib; sourceTree = "<group>"; };
 		B0A29B762464F21900032F91 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		B0A29B782464F65300032F91 /* HelperExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperExtension.swift; sourceTree = "<group>"; };
 		B0A29B7A2464F8C300032F91 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
@@ -122,10 +126,8 @@
 				6DEB679824713A6800A85B4A /* Onboarding Folder */,
 				6DAB8FD224630745003B5C54 /* AppDelegate.swift */,
 				6DAB8FD424630745003B5C54 /* SceneDelegate.swift */,
-				6DAB8FD624630745003B5C54 /* ViewController.swift */,
 				B0A29B782464F65300032F91 /* HelperExtension.swift */,
 				B0A29B7C2465193F00032F91 /* UtilityAnimation.swift */,
-				6DAB8FD824630745003B5C54 /* Main.storyboard */,
 				6DAB8FDE24630746003B5C54 /* Assets.xcassets */,
 				6DAB8FE024630746003B5C54 /* LaunchScreen.storyboard */,
 				6DAB8FE324630746003B5C54 /* Info.plist */,
@@ -156,7 +158,11 @@
 			isa = PBXGroup;
 			children = (
 				B0A29B7A2464F8C300032F91 /* OnboardingVC.swift */,
+				6DAB8FD624630745003B5C54 /* ViewController.swift */,
+				B05972742472506E00508E9E /* OnboardSlide.swift */,
 				B0A29B762464F21900032F91 /* Onboarding.storyboard */,
+				6DAB8FD824630745003B5C54 /* Main.storyboard */,
+				B0597276247250C600508E9E /* onboardSlide.xib */,
 			);
 			path = "Onboarding Folder";
 			sourceTree = "<group>";
@@ -283,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0597277247250C600508E9E /* onboardSlide.xib in Resources */,
 				6DAB8FE224630746003B5C54 /* LaunchScreen.storyboard in Resources */,
 				6DAB8FDF24630746003B5C54 /* Assets.xcassets in Resources */,
 				6DEB679724713A5F00A85B4A /* mainPage.storyboard in Resources */,
@@ -314,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DEB679D24713AFE00A85B4A /* mainPageViewController.swift in Sources */,
+				B05972752472506E00508E9E /* OnboardSlide.swift in Sources */,
 				B0A29B7D2465193F00032F91 /* UtilityAnimation.swift in Sources */,
 				6DAB8FD724630745003B5C54 /* ViewController.swift in Sources */,
 				B0A29B7B2464F8C300032F91 /* OnboardingVC.swift in Sources */,
@@ -495,7 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 82B62MV22U;
+				DEVELOPMENT_TEAM = ZFL7YS72Y3;
 				INFOPLIST_FILE = MiniChallenge2_Kelompok9/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -513,7 +521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 82B62MV22U;
+				DEVELOPMENT_TEAM = ZFL7YS72Y3;
 				INFOPLIST_FILE = MiniChallenge2_Kelompok9/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
