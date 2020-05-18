@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--LoginViewController-->
         <scene sceneID="e4c-AA-qte">
             <objects>
-                <viewController id="hsG-hd-weZ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="LoginViewController" id="hsG-hd-weZ" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VYb-ch-j9F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,11 +65,11 @@
                 <viewControllerPlaceholder storyboardName="mainPage" id="Ji8-7f-IED" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mzG-aG-cev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2786" y="-31"/>
+            <point key="canvasLocation" x="3130" y="33"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wCe-eA-POw"/>
+        <segue reference="zF6-Sp-CJv"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Facebook" width="259" height="67"/>
