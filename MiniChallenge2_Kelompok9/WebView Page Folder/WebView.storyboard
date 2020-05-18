@@ -35,7 +35,6 @@
                     </view>
                     <connections>
                         <outlet property="popWeb" destination="atf-N4-hiy" id="i9o-xB-CsG"/>
-                        <outlet property="webView" destination="atf-N4-hiy" id="8Di-Q8-Jhw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXB-UQ-ipn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
