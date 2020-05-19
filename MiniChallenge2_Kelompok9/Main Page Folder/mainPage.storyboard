@@ -11,7 +11,7 @@
         <!--Main Page View Controller-->
         <scene sceneID="XCK-1C-xcz">
             <objects>
-                <viewController id="VW9-fd-TVd" customClass="mainPageViewController" customModule="MiniChallenge2_Kelompok9" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainLogin" id="VW9-fd-TVd" customClass="mainPageViewController" customModule="MiniChallenge2_Kelompok9" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kal-MN-3gs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="􀍟"/>
                                         <connections>
-                                            <segue destination="hq8-em-4gr" kind="showDetail" id="g6m-qW-Skx"/>
+                                            <segue destination="hq8-em-4gr" kind="show" id="g6m-qW-Skx"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cie-RL-UBR">
@@ -205,6 +205,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="F9T-Ou-o2y"/>
                     </view>
+                    <connections>
+                        <outlet property="joinedDate" destination="vMu-Qo-LHQ" id="eLC-fd-Kbx"/>
+                        <outlet property="userName" destination="Q4x-RO-nRJ" id="fKi-SD-Ewg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9v-FE-PLL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

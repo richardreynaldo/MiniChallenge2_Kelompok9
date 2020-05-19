@@ -12,6 +12,8 @@ import WebKit
 class WebViewController: UIViewController, WKNavigationDelegate {
     
 //    var instagramApi: InstagramApi?
+    //MARK:- Member variables
+    static let shared = WebViewController()
 
     var testUserData: InstagramTestUser?
     
@@ -19,9 +21,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     private let redirectURIURLEncoded = "https%3A%2F%2Fwww.google.com%2F"
     private let redirectURI = "https://www.google.com/"
     private let boundary = "boundary=\(NSUUID().uuidString)"
-    private let app_secret = "438e96746b6e77e0175965b12210d3e5"
+    private let app_secret = ""
     
-//    var mainVC: ViewController?
+    var mainVC: mainPageViewController?
 
     @IBOutlet weak var popWeb: WKWebView! {
         didSet {
@@ -44,6 +46,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     struct InstagramTestUser: Codable {
         var access_token: String
         var user_id: Int
+    }
+    
+    struct InstagramUser: Codable {
+        var id: String
+        var username: String
     }
 
     override func viewDidLoad() {
@@ -179,12 +186,49 @@ class WebViewController: UIViewController, WKNavigationDelegate {
        return body.data(using: .utf8)!
     }
     
+    func getInstagramUsername(testUserData: InstagramTestUser, completion: @escaping (InstagramUser) -> Void) {
+        let urlString = "\(BaseURL.graphApi.rawValue)\(testUserData.user_id)?fields=id,username&access_token=\(testUserData.access_token)"
+        let request = URLRequest(url: URL(string: urlString)!)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: {(data, response, error) in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!)
+            }
+            do { let jsonData = try JSONDecoder().decode(InstagramUser.self, from: data!)
+                completion(jsonData)
+            }
+            catch let error as NSError {
+                print(error)
+            }
+        })
+        dataTask.resume()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "webMain" {
+            if let mainPage = segue.destination as? mainPageViewController {
+                mainPage.user = self.testUserData!
+            }
+        }
+    }
+    
     func dismissViewController() {
 
         DispatchQueue.main.async {
-            self.dismiss(animated: true) {
-                self.testUserData = self.testUserData!
-            }
+//            weak var pvc = self.presentingViewController
+//            if let pvc = self.presentingViewController as? mainPageViewController {
+//                 pvc.user = self.testUserData!
+//            }
+//            self.dismiss(animated: true) {
+//                self.mainVC?.user = self.testUserData!
+//            }
+            self.performSegue(withIdentifier: "webMain", sender: self)
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "mainPage", bundle:nil)
+//            self.mainVC = storyBoard.instantiateViewController(withIdentifier: "mainLogin") as? mainPageViewController
+//            self.present(self.mainVC!, animated:true, completion: nil)
         }
     }
 }

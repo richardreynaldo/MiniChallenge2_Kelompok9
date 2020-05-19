@@ -44,6 +44,9 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="lLP-l6-5Xm" kind="show" id="Hbh-xt-Ny2"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zdC-Oa-iJP">
                                         <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
@@ -71,6 +74,9 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="esC-DU-Mdi" kind="show" id="hhM-Ni-Lt6"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="4Fr-Cy-PB9">
                                         <rect key="frame" x="0.0" y="115" width="414" height="43.5"/>
@@ -98,6 +104,9 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="f4r-x7-DFM" kind="show" id="dZm-nP-vO6"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="FgV-aH-9An">
                                         <rect key="frame" x="0.0" y="158.5" width="414" height="43.5"/>
@@ -125,6 +134,9 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Nbb-w1-LZt" kind="show" id="2tc-b2-xwe"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -147,9 +159,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="0ZE-QE-Hzs" kind="popoverPresentation" popoverAnchorView="DGH-fX-QaA" id="zPb-Og-bIa">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="0ZE-QE-Hzs" kind="showDetail" id="zPb-Og-bIa"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -217,10 +227,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="5Kp-qj-o0n"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Yhl-AR-ypT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVX-4t-WFq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1673.913043478261" y="79.6875"/>
+            <point key="canvasLocation" x="1704" y="80"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="v5W-9c-2rG">
@@ -282,6 +293,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="UeR-1W-0xQ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="aGa-It-DPU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKd-a6-bZM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -333,6 +345,7 @@ feedback!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="YDo-zK-1Bb"/>
                     </view>
+                    <navigationItem key="navigationItem" id="loq-zV-V8d"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgG-37-aGR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -398,6 +411,7 @@ feedback!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="faF-Cu-yZK"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Cv2-nN-f8d"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fvy-hn-zdn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -409,7 +423,7 @@ feedback!</string>
                 <viewControllerPlaceholder storyboardName="Onboarding" referencedIdentifier="LoginViewController" id="0ZE-QE-Hzs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LG8-N4-1LT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1575" y="57"/>
+            <point key="canvasLocation" x="1457" y="-381"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qs1-yD-NkB">

@@ -35,11 +35,22 @@
                     </view>
                     <connections>
                         <outlet property="popWeb" destination="atf-N4-hiy" id="i9o-xB-CsG"/>
+                        <segue destination="Ypg-8b-58C" kind="modal" identifier="webMain" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="Kmb-Zb-UQy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXB-UQ-ipn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158" y="60"/>
+            <point key="canvasLocation" x="183" y="68"/>
+        </scene>
+        <!--mainPage-->
+        <scene sceneID="PZf-qH-4N0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="mainPage" id="Ypg-8b-58C" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3Uy-aN-TrE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hex-Jd-8wy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853" y="99"/>
         </scene>
     </scenes>
 </document>
