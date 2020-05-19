@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D38C8922473DD1400616540 /* PostCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D38C8912473DD1400616540 /* PostCarousel.swift */; };
 		6DAB8FD324630745003B5C54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FD224630745003B5C54 /* AppDelegate.swift */; };
 		6DAB8FD524630745003B5C54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FD424630745003B5C54 /* SceneDelegate.swift */; };
 		6DAB8FD724630745003B5C54 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FD624630745003B5C54 /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D38C8912473DD1400616540 /* PostCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCarousel.swift; sourceTree = "<group>"; };
 		6DAB8FCF24630745003B5C54 /* MiniChallenge2_Kelompok9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChallenge2_Kelompok9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DAB8FD224630745003B5C54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DAB8FD424630745003B5C54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				6DEB679624713A5F00A85B4A /* mainPage.storyboard */,
 				6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */,
+				6D38C8912473DD1400616540 /* PostCarousel.swift */,
 			);
 			path = "Main Page Folder";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				B059727324714B3600508E9E /* detailPageViewController.swift in Sources */,
 				6DAB8FD324630745003B5C54 /* AppDelegate.swift in Sources */,
 				B0A29B792464F65300032F91 /* HelperExtension.swift in Sources */,
+				6D38C8922473DD1400616540 /* PostCarousel.swift in Sources */,
 				6DAB8FD524630745003B5C54 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

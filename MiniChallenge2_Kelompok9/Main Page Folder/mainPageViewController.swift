@@ -10,6 +10,10 @@ import UIKit
 
 class mainPageViewController: UIViewController {
 
+    
+    @IBOutlet weak var mainScrollView: UIScrollView!
+    
+    var imageArray = [UIImage]()
     let webViewController = WebViewController.shared
     
     var user = WebViewController.InstagramTestUser(access_token: "", user_id: 0)
@@ -19,6 +23,20 @@ class mainPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainScrollView.isPagingEnabled = true
+        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
+        
+        for i in 0..<imageArray.count {
+            let imageView = UIImageView()
+            imageView.image = imageArray[i]
+            imageView.contentMode = .scaleToFill
+            let xPosition = self.view.frame.width * CGFloat(i)
+            imageView.frame = CGRect(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+            
+            mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat( i + 1)
+            mainScrollView.addSubview(imageView)
+        }
+        
         if self.user.user_id != 0 {
             let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
             indicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -35,19 +53,17 @@ class mainPageViewController: UIViewController {
                 }
             }
         }
+        
+        
 
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    
+    
+    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
