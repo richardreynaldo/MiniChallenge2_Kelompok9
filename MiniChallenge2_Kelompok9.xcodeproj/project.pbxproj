@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D38C8922473DD1400616540 /* PostCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D38C8912473DD1400616540 /* PostCarousel.swift */; };
+		6D38C8972475003100616540 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D38C8962475003100616540 /* WebKit.framework */; };
 		6DAB8FD324630745003B5C54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FD224630745003B5C54 /* AppDelegate.swift */; };
 		6DAB8FD524630745003B5C54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FD424630745003B5C54 /* SceneDelegate.swift */; };
 		6DAB8FD724630745003B5C54 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FD624630745003B5C54 /* ViewController.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		6D38C8912473DD1400616540 /* PostCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCarousel.swift; sourceTree = "<group>"; };
+		6D38C8962475003100616540 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6DAB8FCF24630745003B5C54 /* MiniChallenge2_Kelompok9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChallenge2_Kelompok9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DAB8FD224630745003B5C54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DAB8FD424630745003B5C54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D38C8972475003100616540 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +111,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D38C8952475003000616540 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D38C8962475003100616540 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6DAB8FC624630745003B5C54 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +126,7 @@
 				6DAB8FEB24630746003B5C54 /* MiniChallenge2_Kelompok9Tests */,
 				6DAB8FF624630746003B5C54 /* MiniChallenge2_Kelompok9UITests */,
 				6DAB8FD024630745003B5C54 /* Products */,
+				6D38C8952475003000616540 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
