@@ -21,7 +21,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     private let redirectURIURLEncoded = "https%3A%2F%2Fwww.google.com%2F"
     private let redirectURI = "https://www.google.com/"
     private let boundary = "boundary=\(NSUUID().uuidString)"
-    private let app_secret = ""
+    private let app_secret = "b2b6850434d1740f8fb8acb0cde87ee0"
     
     var mainVC: mainPageViewController?
 
@@ -51,6 +51,30 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     struct InstagramUser: Codable {
         var id: String
         var username: String
+    }
+    
+    struct InstagramMedia: Codable {
+        struct InstagramCaption: Codable {
+            let id: String
+            let caption: String?
+            enum CodingKeys: String, CodingKey {
+                case id
+                case caption
+            }
+            init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                id = try container.decode(String.self, forKey: .id)
+                caption = try container.decodeIfPresent(String.self, forKey: .caption)
+            }
+        }
+        let data: [InstagramCaption]
+    }
+    
+    struct InstagramPicture: Codable {
+        let mediaURL: String
+        enum CodingKeys: String, CodingKey {
+            case mediaURL = "media_url"
+        }
     }
 
     override func viewDidLoad() {
@@ -198,6 +222,48 @@ class WebViewController: UIViewController, WKNavigationDelegate {
                 print(httpResponse!)
             }
             do { let jsonData = try JSONDecoder().decode(InstagramUser.self, from: data!)
+                completion(jsonData)
+            }
+            catch let error as NSError {
+                print(error)
+            }
+        })
+        dataTask.resume()
+    }
+    
+    func getInstagramPostCaption(testUserData: InstagramTestUser, completion: @escaping (InstagramMedia) -> Void) {
+        let urlString = "\(BaseURL.graphApi.rawValue)me/media?fields=id,caption&access_token=\(testUserData.access_token)"
+        let request = URLRequest(url: URL(string: urlString)!)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: {(data, response, error) in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!)
+            }
+            do { let jsonData = try JSONDecoder().decode(InstagramMedia.self, from: data!)
+                completion(jsonData)
+            }
+            catch let error as NSError {
+                print(error)
+            }
+        })
+        dataTask.resume()
+    }
+    
+    func getInstagramMedia(mediaID: String, testUserData: InstagramTestUser, completion: @escaping (InstagramPicture) -> Void) {
+        let urlString = "\(BaseURL.graphApi.rawValue)\(mediaID)?fields=id,media_type,media_url,username,timestamp&access_token=\(testUserData.access_token)"
+        let request = URLRequest(url: URL(string: urlString)!)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: {(data, response, error) in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!)
+            }
+            do { let jsonData = try JSONDecoder().decode(InstagramPicture.self, from: data!)
                 completion(jsonData)
             }
             catch let error as NSError {

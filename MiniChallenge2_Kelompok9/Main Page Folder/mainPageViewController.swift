@@ -14,28 +14,23 @@ class mainPageViewController: UIViewController {
     @IBOutlet weak var mainScrollView: UIScrollView!
     
     var imageArray = [UIImage]()
+    var mediaArray = [String]()
     let webViewController = WebViewController.shared
+    var dataArray = [WebViewController.InstagramMedia.InstagramCaption]()
     
     var user = WebViewController.InstagramTestUser(access_token: "", user_id: 0)
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var joinedDate: UILabel!
+    @IBOutlet weak var totalPhoto: UILabel!
+    @IBOutlet weak var profilePicture: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainScrollView.isPagingEnabled = true
-        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
         
-        for i in 0..<imageArray.count {
-            let imageView = UIImageView()
-            imageView.image = imageArray[i]
-            imageView.contentMode = .scaleToFill
-            let xPosition = self.view.frame.width * CGFloat(i)
-            imageView.frame = CGRect(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
-            
-            mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat( i + 1)
-            mainScrollView.addSubview(imageView)
-        }
+//        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
+//        mediaArray = []
+//        dataArray = []
         
         if self.user.user_id != 0 {
             let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
@@ -52,7 +47,51 @@ class mainPageViewController: UIViewController {
                     indicator.stopAnimating()
                 }
             }
+            indicator.startAnimating()
+            self.webViewController.getInstagramPostCaption(testUserData: self.user) { [weak self] (caption) in
+//                self?.dataArray = caption.data
+                DispatchQueue.main.async {
+                    self?.totalPhoto.text = "\(caption.data.count)"
+                    indicator.stopAnimating()
+                }
+//                self?.mainScrollView.isPagingEnabled = true
+                for k in 0..<caption.data.count {
+                    self?.webViewController.getInstagramMedia(mediaID: caption.data[k].id, testUserData: self!.user) { [weak self] (picture) in
+//                        self?.mediaArray.append(picture.mediaURL)
+                        self?.profilePicture.downloaded(from: picture.mediaURL)
+//                        let imageView = UIImageView()
+//                        imageView.downloaded(from: picture.mediaURL)
+//                        imageView.contentMode = .scaleToFill
+//                        let xPosition = (self?.view.frame.width)! * CGFloat(k)
+//                        imageView.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
+//                        self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat( k + 1)
+//                        self?.mainScrollView.addSubview(imageView)
+                    }
+                }
+            }
+//            for j in 0..<self.dataArray.count {
+//                self.webViewController.getInstagramMedia(mediaID: dataArray[j].id, testUserData: self.user) { [weak self] (picture) in
+//                    DispatchQueue.main.async {
+//
+//                    }
+//                }
+//            }
         }
+        
+//        print(self.mediaArray)
+        
+//        mainScrollView.isPagingEnabled = true
+//
+//        for i in 0..<imageArray.count {
+//            let imageView = UIImageView()
+//            imageView.image = imageArray[i]
+//            imageView.contentMode = .scaleToFill
+//            let xPosition = self.view.frame.width * CGFloat(i)
+//            imageView.frame = CGRect(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+//
+//            mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat( i + 1)
+//            mainScrollView.addSubview(imageView)
+//        }
         
         
 
@@ -66,4 +105,25 @@ class mainPageViewController: UIViewController {
     
 
 
+}
+
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() {
+                self.image = image
+            }
+        }.resume()
+    }
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
 }
