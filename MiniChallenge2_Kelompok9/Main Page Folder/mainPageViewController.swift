@@ -14,7 +14,6 @@ class mainPageViewController: UIViewController {
     @IBOutlet weak var mainScrollView: UIScrollView!
     
     var imageArray = [UIImage]()
-    var mediaArray = [String]()
     let webViewController = WebViewController.shared
     var dataArray = [WebViewController.InstagramMedia.InstagramCaption]()
     
@@ -29,8 +28,8 @@ class mainPageViewController: UIViewController {
         super.viewDidLoad()
         
 //        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
-//        mediaArray = []
-//        dataArray = []
+        dataArray = []
+        let mediaGroup = DispatchGroup()
         
         if self.user.user_id != 0 {
             let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
@@ -48,34 +47,41 @@ class mainPageViewController: UIViewController {
                 }
             }
             indicator.startAnimating()
+            mediaGroup.enter()
             self.webViewController.getInstagramPostCaption(testUserData: self.user) { [weak self] (caption) in
-//                self?.dataArray = caption.data
+                self?.dataArray = caption.data
                 DispatchQueue.main.async {
                     self?.totalPhoto.text = "\(caption.data.count)"
                     indicator.stopAnimating()
                 }
-//                self?.mainScrollView.isPagingEnabled = true
-                for k in 0..<caption.data.count {
-                    self?.webViewController.getInstagramMedia(mediaID: caption.data[k].id, testUserData: self!.user) { [weak self] (picture) in
-//                        self?.mediaArray.append(picture.mediaURL)
-                        self?.profilePicture.downloaded(from: picture.mediaURL)
-//                        let imageView = UIImageView()
-//                        imageView.downloaded(from: picture.mediaURL)
-//                        imageView.contentMode = .scaleToFill
-//                        let xPosition = (self?.view.frame.width)! * CGFloat(k)
-//                        imageView.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
-//                        self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat( k + 1)
-//                        self?.mainScrollView.addSubview(imageView)
+                mediaGroup.leave()
+            }
+        }
+        
+        mediaGroup.notify(queue: .main) {
+            print("Total Image: \(self.dataArray.count)")
+            self.mainScrollView.isPagingEnabled = true
+            let imageGroup = DispatchGroup()
+            for j in 0..<self.dataArray.count {
+                self.webViewController.getInstagramMedia(mediaID: self.dataArray[j].id, testUserData: self.user) { [weak self] (picture) in
+                    self?.profilePicture.downloaded(from: picture.mediaURL)
+                    imageGroup.enter()
+                    var imageView: UIImageView?
+                    DispatchQueue.main.async {
+                        imageView = UIImageView()
+                        imageView?.downloaded(from: picture.mediaURL)
+                        imageGroup.leave()
+                    }
+                    imageGroup.notify(queue: .main) {
+                        imageView?.contentMode = .scaleToFill
+                        let xPosition = (self?.view.frame.width)! * CGFloat(j)
+                        imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
+            
+                        self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat( j + 1)
+                        self?.mainScrollView.addSubview(imageView!)
                     }
                 }
             }
-//            for j in 0..<self.dataArray.count {
-//                self.webViewController.getInstagramMedia(mediaID: dataArray[j].id, testUserData: self.user) { [weak self] (picture) in
-//                    DispatchQueue.main.async {
-//
-//                    }
-//                }
-//            }
         }
         
 //        print(self.mediaArray)
