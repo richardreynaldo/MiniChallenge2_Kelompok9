@@ -57,14 +57,17 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         struct InstagramCaption: Codable {
             let id: String
             let caption: String?
+            let mediaType: String
             enum CodingKeys: String, CodingKey {
                 case id
                 case caption
+                case mediaType = "media_type"
             }
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 id = try container.decode(String.self, forKey: .id)
                 caption = try container.decodeIfPresent(String.self, forKey: .caption)
+                mediaType = try container.decode(String.self, forKey: .mediaType)
             }
         }
         let data: [InstagramCaption]
@@ -232,7 +235,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     func getInstagramPostCaption(testUserData: InstagramTestUser, completion: @escaping (InstagramMedia) -> Void) {
-        let urlString = "\(BaseURL.graphApi.rawValue)me/media?fields=id,caption&access_token=\(testUserData.access_token)"
+        let urlString = "\(BaseURL.graphApi.rawValue)me/media?fields=id,caption,media_type&access_token=\(testUserData.access_token)"
         let request = URLRequest(url: URL(string: urlString)!)
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request, completionHandler: {(data, response, error) in

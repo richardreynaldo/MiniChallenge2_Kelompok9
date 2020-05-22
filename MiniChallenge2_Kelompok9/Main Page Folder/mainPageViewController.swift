@@ -30,14 +30,14 @@ class mainPageViewController: UIViewController {
 //        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
         dataArray = []
         let mediaGroup = DispatchGroup()
+        let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+        indicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        indicator.center = view.center
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         if self.user.user_id != 0 {
-            let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-            indicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            indicator.center = view.center
-            self.view.addSubview(indicator)
-            self.view.bringSubviewToFront(indicator)
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             indicator.startAnimating()
             self.webViewController.getInstagramUsername(testUserData: self.user) { [weak self] (username) in
                 DispatchQueue.main.async {
@@ -49,7 +49,11 @@ class mainPageViewController: UIViewController {
             indicator.startAnimating()
             mediaGroup.enter()
             self.webViewController.getInstagramPostCaption(testUserData: self.user) { [weak self] (caption) in
-                self?.dataArray = caption.data
+                for k in 0..<caption.data.count {
+                    if caption.data[k].mediaType == "IMAGE" {
+                        self?.dataArray.append(caption.data[k])
+                    }
+                }
                 DispatchQueue.main.async {
                     self?.totalPhoto.text = "\(caption.data.count)"
                     indicator.stopAnimating()
@@ -59,6 +63,7 @@ class mainPageViewController: UIViewController {
         }
         
         mediaGroup.notify(queue: .main) {
+            indicator.startAnimating()
             print("Total Image: \(self.dataArray.count)")
             self.mainScrollView.isPagingEnabled = true
             let imageGroup = DispatchGroup()
@@ -71,17 +76,17 @@ class mainPageViewController: UIViewController {
                     DispatchQueue.main.async {
                         imageView = UIImageView()
                         imageView?.downloaded(from: picture.mediaURL)
-                        
                         imageGroup.leave()
                         imageView?.contentMode = .scaleToFill
-                                    let xPosition = (self?.view.frame.width)! * CGFloat(j)
-                                    imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
-                        
+                        let xPosition = (self?.view.frame.width)! * CGFloat(j)
+                        imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
                         self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat(x)
-                                    self?.mainScrollView.addSubview(imageView!)
-                        
+                        self?.mainScrollView.addSubview(imageView!)
                     }
                 }
+            }
+            imageGroup.notify(queue: .main) {
+                indicator.stopAnimating()
             }
         }
         
