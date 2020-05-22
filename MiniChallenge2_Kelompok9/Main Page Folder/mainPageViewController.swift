@@ -62,6 +62,7 @@ class mainPageViewController: UIViewController {
             print("Total Image: \(self.dataArray.count)")
             self.mainScrollView.isPagingEnabled = true
             let imageGroup = DispatchGroup()
+            let x = self.dataArray.count
             for j in 0..<self.dataArray.count {
                 self.webViewController.getInstagramMedia(mediaID: self.dataArray[j].id, testUserData: self.user) { [weak self] (picture) in
                     self?.profilePicture.downloaded(from: picture.mediaURL)
@@ -70,15 +71,15 @@ class mainPageViewController: UIViewController {
                     DispatchQueue.main.async {
                         imageView = UIImageView()
                         imageView?.downloaded(from: picture.mediaURL)
+                        
                         imageGroup.leave()
-                    }
-                    imageGroup.notify(queue: .main) {
                         imageView?.contentMode = .scaleToFill
-                        let xPosition = (self?.view.frame.width)! * CGFloat(j)
-                        imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
-            
-                        self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat( j + 1)
-                        self?.mainScrollView.addSubview(imageView!)
+                                    let xPosition = (self?.view.frame.width)! * CGFloat(j)
+                                    imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
+                        
+                        self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat(x)
+                                    self?.mainScrollView.addSubview(imageView!)
+                        
                     }
                 }
             }
