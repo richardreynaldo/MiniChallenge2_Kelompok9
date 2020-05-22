@@ -71,15 +71,15 @@ class mainPageViewController: UIViewController {
                     DispatchQueue.main.async {
                         imageView = UIImageView()
                         imageView?.downloaded(from: picture.mediaURL)
-                        
                         imageGroup.leave()
+                    }
+                    imageGroup.notify(queue: .main) {
                         imageView?.contentMode = .scaleToFill
-                                    let xPosition = (self?.view.frame.width)! * CGFloat(j)
-                                    imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
-                        
+                        let xPosition = (self?.view.frame.width)! * CGFloat(j)
+                        imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
+            
                         self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat(x)
-                                    self?.mainScrollView.addSubview(imageView!)
-                        
+                        self?.mainScrollView.addSubview(imageView!)
                     }
                 }
             }
