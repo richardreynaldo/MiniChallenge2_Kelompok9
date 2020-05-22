@@ -10,9 +10,13 @@ import UIKit
 
 class detailPageViewController: UIViewController {
 
+    @IBOutlet weak var detailImage: UIImageView!
+    var selectedImage: UIImageView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        detailImage.image = selectedImage?.image
         // Do any additional setup after loading the view.
     }
     

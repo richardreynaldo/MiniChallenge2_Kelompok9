@@ -16,6 +16,7 @@ class mainPageViewController: UIViewController {
     var imageArray = [UIImage]()
     let webViewController = WebViewController.shared
     var dataArray = [WebViewController.InstagramMedia.InstagramCaption]()
+    var selectImage: UIImageView?
     
     var user = WebViewController.InstagramTestUser(access_token: "", user_id: 0)
     
@@ -36,6 +37,9 @@ class mainPageViewController: UIViewController {
         self.view.addSubview(indicator)
         self.view.bringSubviewToFront(indicator)
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        let tap = CustomImageTapGesture.init(target: self, action: #selector(handleTap))
         
         if self.user.user_id != 0 {
             indicator.startAnimating()
@@ -77,9 +81,14 @@ class mainPageViewController: UIViewController {
                         imageView = UIImageView()
                         imageView?.downloaded(from: picture.mediaURL)
                         imageGroup.leave()
+                    }
+                    imageGroup.notify(queue: .main) {
+                        tap.imageTap = imageView
+                        tap.numberOfTapsRequired = 1
+                        imageView?.addGestureRecognizer(tap)
                         imageView?.contentMode = .scaleToFill
                         let xPosition = (self?.view.frame.width)! * CGFloat(j)
-                        imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)
+                        imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)            
                         self?.mainScrollView.contentSize.width = (self?.mainScrollView.frame.width)! * CGFloat(x)
                         self?.mainScrollView.addSubview(imageView!)
                     }
@@ -110,13 +119,30 @@ class mainPageViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+//    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    @objc func handleTap(recognizer: CustomImageTapGesture) {
+        // handling code
+        selectImage = recognizer.imageTap
+        self.performSegue(withIdentifier: "detailMain", sender: self)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailMain" {
+            if let detailPage = segue.destination as? detailPageViewController {
+                detailPage.selectedImage = selectImage
+            }
+        }
+    }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
-    
-    
+}
 
-
+class CustomImageTapGesture: UITapGestureRecognizer {
+    var imageTap: UIImageView?
 }
 
 extension UIImageView {

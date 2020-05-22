@@ -196,11 +196,12 @@
                         <outlet property="profilePicture" destination="cie-RL-UBR" id="TAa-zg-6Ij"/>
                         <outlet property="totalPhoto" destination="wxW-TV-Ogq" id="qt2-uJ-Y1T"/>
                         <outlet property="userName" destination="Q4x-RO-nRJ" id="fKi-SD-Ewg"/>
+                        <segue destination="3pY-lP-jhG" kind="show" identifier="detailMain" id="UHi-6d-UaC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9v-FE-PLL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89.855072463768124" y="94.419642857142847"/>
+            <point key="canvasLocation" x="122" y="120"/>
         </scene>
         <!--Setting-->
         <scene sceneID="iL0-y9-ire">
@@ -211,6 +212,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4i-VX-GpZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="837" y="100"/>
+        </scene>
+        <!--detailPage-->
+        <scene sceneID="0lE-US-ZS2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="detailPage" id="3pY-lP-jhG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="a0R-2p-7Pn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jlq-3F-dnw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="2"/>
         </scene>
     </scenes>
     <resources>
