@@ -53,6 +53,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Hey folks, please allow the application to open the camera, due to get your post detail.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Hey folks, please allow the application to open the library, to select image from it and get your post detail.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

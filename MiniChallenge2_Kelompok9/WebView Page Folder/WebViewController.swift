@@ -79,6 +79,19 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             case mediaURL = "media_url"
         }
     }
+    
+    struct TextResult: Codable {
+        struct ResultText: Codable {
+            let parsedText: String
+            enum CodingKeys: String, CodingKey {
+                case parsedText = "ParsedText"
+            }
+        }
+        enum CodingKeys: String, CodingKey {
+            case parsedResults = "ParsedResults"
+        }
+        let parsedResults: [ResultText]
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -276,6 +289,76 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         dataTask.resume()
     }
     
+    func getTextFromPhoto(image: UIImage, completion: @escaping (TextResult) -> Void) {
+        let imageData = image.jpegData(compressionQuality: 1)
+
+        if(imageData==nil)  { return; }
+        let parameters = [
+            [
+                "name": "language",
+                "value": "eng"
+            ],
+            [
+                "name": "isOverlayRequired",
+                "value": "false"
+            ]
+        ]
+        
+        var request = URLRequest(url: URL(string: "https://api.ocr.space/parse/image")!)
+        
+        request.httpMethod = "POST"
+        request.addValue("b139c8589c88957", forHTTPHeaderField: "apikey")
+        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBody = createBodyWithParameters(parameters, filePathKey: "url", imageDataKey: imageData! as NSData, boundary: boundary) as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: {(data, response, error) in
+            print(String(data: data!, encoding: .utf8)!)
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!)
+                do { let jsonData = try JSONDecoder().decode(TextResult.self, from: data!)
+                    print(jsonData)
+                    completion(jsonData)
+                }
+                catch let error as NSError {
+                    print(error)
+                }
+                
+            }
+        })
+        dataTask.resume()
+    }
+    
+    private func createBodyWithParameters(_ parameters: [[String : String]], filePathKey: String?, imageDataKey: NSData, boundary: String) -> NSData {
+        let body = NSMutableData();
+
+        for param in parameters {
+            let paramName = param["name"]!
+            body.appendString("--\(boundary)\r\n")
+            body.appendString("Content-Disposition: form-data; name=\"\(paramName)\"\r\n\r\n")
+            if let paramValue = param["value"] {
+                body.appendString("\(paramValue)\r\n")
+            }
+        }
+
+        let filename = "uploaded-image.jpg"
+
+        let mimetype = "image/jpg"
+
+        body.appendString("--\(boundary)\r\n")
+        body.appendString("Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n")
+        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+        body.append(imageDataKey as Data)
+        body.appendString("\r\n")
+
+        body.appendString("--\(boundary)--\r\n")
+
+        return body
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "webMain" {
             if let mainPage = segue.destination as? mainPageViewController {
@@ -299,5 +382,13 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 //            self.mainVC = storyBoard.instantiateViewController(withIdentifier: "mainLogin") as? mainPageViewController
 //            self.present(self.mainVC!, animated:true, completion: nil)
         }
+    }
+}
+
+extension NSMutableData {
+
+    func appendString(_ string: String) {
+        let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
+        append(data!)
     }
 }

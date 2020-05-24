@@ -191,9 +191,14 @@
                         <viewLayoutGuide key="safeArea" id="F9T-Ou-o2y"/>
                     </view>
                     <connections>
+                        <outlet property="commentCount" destination="OA8-hD-dMN" id="FhX-AF-lb1"/>
+                        <outlet property="discoveryCount" destination="ePX-mI-kpW" id="2di-TG-uyz"/>
                         <outlet property="joinedDate" destination="vMu-Qo-LHQ" id="eLC-fd-Kbx"/>
+                        <outlet property="loveCount" destination="kYr-Lq-vct" id="zFT-7Y-ogu"/>
                         <outlet property="mainScrollView" destination="uxQ-jm-XLe" id="DD1-Dc-UWR"/>
+                        <outlet property="postSummary" destination="4Hh-P9-RGK" id="tsK-9x-cUV"/>
                         <outlet property="profilePicture" destination="cie-RL-UBR" id="TAa-zg-6Ij"/>
+                        <outlet property="reachRate" destination="d2L-s6-jEr" id="MTI-UZ-hRq"/>
                         <outlet property="totalPhoto" destination="wxW-TV-Ogq" id="qt2-uJ-Y1T"/>
                         <outlet property="userName" destination="Q4x-RO-nRJ" id="fKi-SD-Ewg"/>
                         <segue destination="3pY-lP-jhG" kind="show" identifier="detailMain" id="UHi-6d-UaC"/>
