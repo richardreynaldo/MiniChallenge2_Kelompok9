@@ -361,9 +361,10 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "webMain" {
-            if let mainPage = segue.destination as? mainPageViewController {
+            let navPage = segue.destination as! UINavigationController
+            let mainPage = navPage.topViewController as! mainPageViewController
                 mainPage.user = self.testUserData!
-            }
+            
         }
     }
     
