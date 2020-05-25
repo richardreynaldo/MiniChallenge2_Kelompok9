@@ -11,7 +11,7 @@
         <!--Main Page View Controller-->
         <scene sceneID="XCK-1C-xcz">
             <objects>
-                <viewController storyboardIdentifier="mainLogin" id="VW9-fd-TVd" customClass="mainPageViewController" customModule="MiniChallenge2_Kelompok9" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainPageController" id="VW9-fd-TVd" customClass="mainPageViewController" customModule="MiniChallenge2_Kelompok9" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kal-MN-3gs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
