@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JyL-S2-lCo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--SettingVC-->
         <scene sceneID="wZP-13-q3g">
             <objects>
-                <tableViewController id="5uT-Hw-OXK" customClass="SettingVC" customModule="MiniChallenge2_Kelompok9" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingController" id="5uT-Hw-OXK" customClass="SettingVC" customModule="MiniChallenge2_Kelompok9" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TkV-f5-ff5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,7 +181,7 @@
             <objects>
                 <viewController id="lLP-l6-5Xm" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="krm-Ra-ocD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Logo " translatesAutoresizingMaskIntoConstraints="NO" id="QSk-x6-QLI">
@@ -238,7 +238,7 @@
             <objects>
                 <viewController id="f4r-x7-DFM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vpq-R2-yM5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page help &amp; support" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpQ-jo-5Cf">
@@ -304,7 +304,7 @@
             <objects>
                 <viewController id="Nbb-w1-LZt" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bt7-0e-fwm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="undraw_message_sent_1030" translatesAutoresizingMaskIntoConstraints="NO" id="TJw-ed-Vu1">
@@ -356,7 +356,7 @@ feedback!</string>
             <objects>
                 <viewController id="esC-DU-Mdi" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kVb-Ff-6xu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page privacy &amp; security" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuT-P4-9L6">
@@ -425,32 +425,14 @@ feedback!</string>
             </objects>
             <point key="canvasLocation" x="1457" y="-381"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Qs1-yD-NkB">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JyL-S2-lCo" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aFA-dI-uM9">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5uT-Hw-OXK" kind="relationship" relationship="rootViewController" id="Zxv-QJ-kAt"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XiP-mp-ipm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="20.289855072463769" y="80.357142857142847"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Logo " width="600" height="790"/>
         <image name="Send" width="277" height="39"/>
-        <image name="info.circle" catalog="system" width="64" height="60"/>
-        <image name="lock" catalog="system" width="64" height="64"/>
-        <image name="questionmark.circle" catalog="system" width="64" height="60"/>
-        <image name="text.bubble" catalog="system" width="64" height="54"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="lock" catalog="system" width="128" height="128"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
+        <image name="text.bubble" catalog="system" width="128" height="110"/>
         <image name="undraw_message_sent_1030" width="251" height="154"/>
     </resources>
 </document>
