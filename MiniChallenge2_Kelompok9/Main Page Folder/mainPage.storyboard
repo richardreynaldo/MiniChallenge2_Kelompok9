@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2kC-CI-GBg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2kC-CI-GBg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -183,8 +183,13 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uxQ-jm-XLe">
                                 <rect key="frame" x="0.0" y="206" width="414" height="188"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="eZy-md-L0S"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="vAj-nA-r2L"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="png-HS-zP6" appends="YES" id="LCH-eh-XhO"/>
+                                    <outletCollection property="gestureRecognizers" destination="FGL-v5-mwe" appends="YES" id="0af-aM-UAI"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -195,17 +200,29 @@
                         <outlet property="commentCount" destination="OA8-hD-dMN" id="FhX-AF-lb1"/>
                         <outlet property="discoveryCount" destination="ePX-mI-kpW" id="2di-TG-uyz"/>
                         <outlet property="joinedDate" destination="vMu-Qo-LHQ" id="eLC-fd-Kbx"/>
+                        <outlet property="leftScroll" destination="png-HS-zP6" id="SGK-pV-hiI"/>
                         <outlet property="loveCount" destination="kYr-Lq-vct" id="zFT-7Y-ogu"/>
                         <outlet property="mainScrollView" destination="uxQ-jm-XLe" id="DD1-Dc-UWR"/>
                         <outlet property="postSummary" destination="4Hh-P9-RGK" id="tsK-9x-cUV"/>
                         <outlet property="profilePicture" destination="cie-RL-UBR" id="TAa-zg-6Ij"/>
                         <outlet property="reachRate" destination="d2L-s6-jEr" id="MTI-UZ-hRq"/>
+                        <outlet property="rightScroll" destination="FGL-v5-mwe" id="TWY-nD-kWi"/>
                         <outlet property="totalPhoto" destination="wxW-TV-Ogq" id="qt2-uJ-Y1T"/>
                         <outlet property="userName" destination="Q4x-RO-nRJ" id="fKi-SD-Ewg"/>
                         <segue destination="3pY-lP-jhG" kind="show" identifier="detailMain" id="UHi-6d-UaC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9v-FE-PLL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="png-HS-zP6">
+                    <connections>
+                        <action selector="handleImageSwipe:" destination="VW9-fd-TVd" id="08s-xh-u53"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="FGL-v5-mwe">
+                    <connections>
+                        <action selector="handleImageSwipe:" destination="VW9-fd-TVd" id="kVD-BN-SUf"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1031.8840579710145" y="119.86607142857142"/>
         </scene>

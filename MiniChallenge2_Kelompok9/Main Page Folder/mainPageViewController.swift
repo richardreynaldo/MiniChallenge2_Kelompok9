@@ -17,6 +17,8 @@ class mainPageViewController: UIViewController {
     let webViewController = WebViewController.shared
     var dataArray = [WebViewController.InstagramMedia.InstagramCaption]()
     var selectImage: UIImage?
+    var imagePosition: Int = 0
+    var customArray = [CustomImageSorting]()
     
     var user = WebViewController.InstagramTestUser(access_token: "", user_id: 0)
     
@@ -30,6 +32,8 @@ class mainPageViewController: UIViewController {
     @IBOutlet weak var loveCount: UILabel!
     @IBOutlet weak var commentCount: UILabel!
     @IBOutlet weak var postSummary: UIView!
+    @IBOutlet var leftScroll: UISwipeGestureRecognizer!
+    @IBOutlet var rightScroll: UISwipeGestureRecognizer!
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -46,6 +50,7 @@ class mainPageViewController: UIViewController {
         
 //        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
         dataArray = []
+        customArray = []
         let mediaGroup = DispatchGroup()
         let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
         indicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -56,8 +61,14 @@ class mainPageViewController: UIViewController {
         
         let summaryTap = UITapGestureRecognizer(target: self, action: #selector(self.handleSummaryTap(_:)))
         postSummary.addGestureRecognizer(summaryTap)
+        let customTap = CustomImageTapGesture.init(target: self, action: #selector(handleCustomTap))
         let scrollTap = UITapGestureRecognizer(target: self, action: #selector(self.handleScrollTap))
         mainScrollView.addGestureRecognizer(scrollTap)
+        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
+        leftGesture.direction = .left
+        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
+        mainScrollView.addGestureRecognizer(leftGesture)
+        mainScrollView.addGestureRecognizer(rightGesture)
         
         if self.user.user_id != 0 {
             indicator.startAnimating()
@@ -101,7 +112,26 @@ class mainPageViewController: UIViewController {
 //                        imageGroup.leave()
                     }
                     imageGroup.notify(queue: .main) {
-                        self?.imageArray.append(imageView!.image!)
+                        customTap.imageTap = imageView
+                        customTap.numberOfTapsRequired = 1
+                        imageView?.addGestureRecognizer(customTap)
+                        let customSort = CustomImageSorting()
+                        customSort.imageData = imageView?.image!
+                        customSort.timestamp = picture.timestamp.toDate()
+                        if self?.customArray.count == 0 {
+                            self?.customArray.append(customSort)
+                        }else{
+                            for p in 0..<self!.customArray.count {
+                                if  (self?.customArray[p].timestamp)!.compare(customSort.timestamp!) == ComparisonResult.orderedAscending {
+                                    let temp = self?.customArray[p]
+                                    self?.customArray[p] = customSort
+                                    self?.customArray.append(temp!)
+                                }else{
+                                    self?.customArray.append(customSort)
+                                }
+                            }
+                        }
+//                        self?.imageArray.append(imageView!.image!)
                         imageView?.contentMode = .scaleToFill
                         let xPosition = (self?.view.frame.width)! * CGFloat(j)
                         imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)            
@@ -138,34 +168,53 @@ class mainPageViewController: UIViewController {
     @objc func handleSummaryTap(_ sender: UITapGestureRecognizer? = nil) {
         self.openCameraAndLibrary()
     }
+    @objc func handleCustomTap(recognizer: CustomImageTapGesture) {
+        // handling code
+        print("custom tap")
+        selectImage = recognizer.imageTap?.image
+        self.performSegue(withIdentifier: "detailMain", sender: self)
+    }
+    @IBAction func handleImageSwipe(_ sender: UISwipeGestureRecognizer) {
+        switch sender{
+        case rightScroll:
+            imagePosition += 1
+        case leftScroll:
+            imagePosition -= 1
+        default:
+            return
+        }
+        print(imagePosition)
+    }
     @objc func handleScrollTap(tap: UITapGestureRecognizer) {
+        self.performSegue(withIdentifier: "detailMain", sender: self)
 //        let location = tap.location(in: tap.view)
         // get the tag for the clicked imageView
-        guard let tag = tap.view?.tag else { return }
+//        guard let tag = tap.view?.tag else { return }
 
 //        for n in 0..<mainScrollView.subviews.count{
 //            let subViewTapped = mainScrollView.subviews[n]
 //            if subViewTapped.frame.contains(location) {
         // iterate through your scrollViews subviews
            // and check if it´s an imageView
-           for case let imageView as UIImageView in mainScrollView.subviews {
+//           for case let imageView as UIImageView in mainScrollView.subviews {
                // check if the tag matches the clicked tag
-               if imageView.tag == tag {
+//               if imageView.tag == tag {
                    // this is the tag the user has clicked on
                    // highlight it here
-                selectImage = imageView.image
+//                selectImage = imageView.image
 //                print("tapped subview at index\(n)")
                 // do your stuff here
-                self.performSegue(withIdentifier: "detailMain", sender: self)
-            }
-        }
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailMain" {
             let navPage = segue.destination as! UINavigationController
             let detailPage = navPage.topViewController as! detailPageViewController
-            detailPage.selectedImage = selectImage
+//            detailPage.selectedImage = selectImage
+            detailPage.selectedImage = customArray[imagePosition].imageData
+            print(imagePosition)
         }
     }
     
@@ -174,6 +223,23 @@ class mainPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+class CustomImageTapGesture: UITapGestureRecognizer {
+    var imageTap: UIImageView?
+}
+
+class CustomImageSorting {
+    var imageData: UIImage?
+    var timestamp: Date?
+}
+
+extension String {
+    func toDate() -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        return formatter.date(from: self)
+    }
 }
 
 extension UIImageView {

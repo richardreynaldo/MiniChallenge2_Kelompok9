@@ -75,8 +75,10 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     struct InstagramPicture: Codable {
         let mediaURL: String
+        let timestamp: String
         enum CodingKeys: String, CodingKey {
             case mediaURL = "media_url"
+            case timestamp
         }
     }
     
