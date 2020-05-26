@@ -363,8 +363,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         if segue.identifier == "webMain" {
             let navPage = segue.destination as! UINavigationController
             let mainPage = navPage.topViewController as! mainPageViewController
-                mainPage.user = self.testUserData!
-            
+            mainPage.user = self.testUserData!
         }
     }
     

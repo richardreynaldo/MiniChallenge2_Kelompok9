@@ -16,7 +16,7 @@ class mainPageViewController: UIViewController {
     var imageArray = [UIImage]()
     let webViewController = WebViewController.shared
     var dataArray = [WebViewController.InstagramMedia.InstagramCaption]()
-    var selectImage: UIImageView?
+    var selectImage: UIImage?
     
     var user = WebViewController.InstagramTestUser(access_token: "", user_id: 0)
     
@@ -54,9 +54,10 @@ class mainPageViewController: UIViewController {
         self.view.bringSubviewToFront(indicator)
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        postSummary.addGestureRecognizer(tap)
-        let customTap = CustomImageTapGesture.init(target: self, action: #selector(handleCustomTap))
+        let summaryTap = UITapGestureRecognizer(target: self, action: #selector(self.handleSummaryTap(_:)))
+        postSummary.addGestureRecognizer(summaryTap)
+        let scrollTap = UITapGestureRecognizer(target: self, action: #selector(self.handleScrollTap))
+        mainScrollView.addGestureRecognizer(scrollTap)
         
         if self.user.user_id != 0 {
             indicator.startAnimating()
@@ -91,18 +92,16 @@ class mainPageViewController: UIViewController {
             let x = self.dataArray.count
             for j in 0..<self.dataArray.count {
                 self.webViewController.getInstagramMedia(mediaID: self.dataArray[j].id, testUserData: self.user) { [weak self] (picture) in
-                    self?.profilePicture.downloaded(from: picture.mediaURL)
+                    self?.profilePicture.downloaded(from: picture.mediaURL, imageGroup: nil)
                     imageGroup.enter()
                     var imageView: UIImageView?
                     DispatchQueue.main.async {
                         imageView = UIImageView()
-                        imageView?.downloaded(from: picture.mediaURL)
-                        imageGroup.leave()
+                        imageView?.downloaded(from: picture.mediaURL, imageGroup: imageGroup)
+//                        imageGroup.leave()
                     }
                     imageGroup.notify(queue: .main) {
-                        customTap.imageTap = imageView
-                        customTap.numberOfTapsRequired = 1
-                        imageView?.addGestureRecognizer(customTap)
+                        self?.imageArray.append(imageView!.image!)
                         imageView?.contentMode = .scaleToFill
                         let xPosition = (self?.view.frame.width)! * CGFloat(j)
                         imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)            
@@ -136,20 +135,37 @@ class mainPageViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    @objc func handleSummaryTap(_ sender: UITapGestureRecognizer? = nil) {
         self.openCameraAndLibrary()
     }
-    @objc func handleCustomTap(recognizer: CustomImageTapGesture) {
-        // handling code
-        selectImage = recognizer.imageTap
-        self.performSegue(withIdentifier: "detailMain", sender: self)
+    @objc func handleScrollTap(tap: UITapGestureRecognizer) {
+//        let location = tap.location(in: tap.view)
+        // get the tag for the clicked imageView
+        guard let tag = tap.view?.tag else { return }
+
+//        for n in 0..<mainScrollView.subviews.count{
+//            let subViewTapped = mainScrollView.subviews[n]
+//            if subViewTapped.frame.contains(location) {
+        // iterate through your scrollViews subviews
+           // and check if it´s an imageView
+           for case let imageView as UIImageView in mainScrollView.subviews {
+               // check if the tag matches the clicked tag
+               if imageView.tag == tag {
+                   // this is the tag the user has clicked on
+                   // highlight it here
+                selectImage = imageView.image
+//                print("tapped subview at index\(n)")
+                // do your stuff here
+                self.performSegue(withIdentifier: "detailMain", sender: self)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailMain" {
-            if let detailPage = segue.destination as? detailPageViewController {
-                detailPage.selectedImage = selectImage
-            }
+            let navPage = segue.destination as! UINavigationController
+            let detailPage = navPage.topViewController as! detailPageViewController
+            detailPage.selectedImage = selectImage
         }
     }
     
@@ -160,12 +176,8 @@ class mainPageViewController: UIViewController {
     
 }
 
-class CustomImageTapGesture: UITapGestureRecognizer {
-    var imageTap: UIImageView?
-}
-
 extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+    func downloaded(from url: URL, imageGroup: DispatchGroup?, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard
@@ -176,12 +188,15 @@ extension UIImageView {
                 else { return }
             DispatchQueue.main.async() {
                 self.image = image
+                if imageGroup != nil {
+                    imageGroup?.leave()
+                }
             }
         }.resume()
     }
-    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+    func downloaded(from link: String, imageGroup: DispatchGroup?, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
         guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
+        downloaded(from: url, imageGroup: imageGroup, contentMode: mode)
     }
 }
 
@@ -216,7 +231,7 @@ extension mainPageViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageTaken = info[.originalImage] as? UIImage {
             picker.dismiss(animated: true) {
-                self.selectImage?.image = imageTaken
+                self.selectImage? = imageTaken
                 // request to analyse process on execute
                 self.webViewController.getTextFromPhoto(image: imageTaken) { [weak self] (text) in
                     let splitText = text.parsedResults[0].parsedText.components(separatedBy: "\r\n")
