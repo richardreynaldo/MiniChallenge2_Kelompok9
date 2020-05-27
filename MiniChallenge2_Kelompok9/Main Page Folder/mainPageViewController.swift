@@ -27,13 +27,16 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
 //    @IBOutlet weak var totalPhoto: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
-//    @IBOutlet weak var discoveryCount: UILabel!
-//    @IBOutlet weak var reachRate: UILabel!
-//    @IBOutlet weak var loveCount: UILabel!
-//    @IBOutlet weak var commentCount: UILabel!
-//    @IBOutlet weak var postSummary: UIView!
     @IBOutlet var leftScroll: UISwipeGestureRecognizer!
     @IBOutlet var rightScroll: UISwipeGestureRecognizer!
+    
+    //Tutorial View Outlet
+    
+    @IBOutlet weak var tutor1View: UIView!
+    @IBOutlet weak var tutor2View: UIView!
+    @IBOutlet weak var tutor3View: UIView!
+    @IBOutlet weak var tutor4View: UIView!
+    @IBOutlet weak var tutor5View: UIView!
     
     @IBOutlet weak var manualButton: UIButton!
     @IBOutlet weak var adviseView: UIView!
@@ -49,10 +52,50 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     var categoryValueAccountGrowth = ["26.7k", "40.1k", "100"]
     //---------------------------------------------
     
+    //Function Tutorial
+    
+    @IBAction func tutor1Button(_ sender: Any) {
+        tutor1View.alpha = 0
+        tutor3View.alpha = 1
+    }
+    @IBAction func skip1Button(_ sender: Any) {
+        tutor1View.alpha = 0
+    }
+    @IBAction func tutor3Button(_ sender: Any) {
+        tutor3View.alpha = 0
+        tutor2View.alpha = 1
+    }
+    @IBAction func skip3Button(_ sender: Any) {
+        tutor3View.alpha = 0
+    }
+    @IBAction func tutor2Button(_ sender: Any) {
+        tutor2View.alpha = 0
+        tutor4View.alpha = 1
+    }
+    @IBAction func skip2Button(_ sender: Any) {
+        tutor2View.alpha = 0
+    }
+    @IBAction func tutor4Button(_ sender: Any) {
+        tutor4View.alpha = 0
+        tutor5View.alpha = 1
+    }
+    @IBAction func skip4Button(_ sender: Any) {
+        tutor4View.alpha = 0
+        
+    }
+    @IBAction func tutor5Button(_ sender: Any) {
+        tutor5View.alpha = 0
+    }
+    @IBAction func skip5Button(_ sender: Any) {
+        tutor5View.alpha = 0
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
+        tutor1View.alpha = 1
     }
 
     override func viewWillDisappear(_ animated: Bool) {
