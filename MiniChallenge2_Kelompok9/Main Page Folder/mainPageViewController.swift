@@ -7,9 +7,24 @@
 //
 
 import UIKit
+import CoreML
+import Vision
 
 class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    // Create request to CoreML
+       lazy var analyseRequest: VNCoreMLRequest = {
+           do {
+               let model = try VNCoreMLModel(for: ContentType().model) // Initiate the ML Model to our request
+               let request = VNCoreMLRequest(model: model) { [weak self] (request, error) in
+                   self?.processToAnalyse(for: request, error: error) // Ask the machine to process evaluate the object request and give the result based on the ML Model.
+               }
+               request.imageCropAndScaleOption = .centerCrop
+               return request
+           } catch {
+               fatalError("Failed to load ML Model: \(error)")
+           }
+       }()
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     
@@ -90,7 +105,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         tutor5View.alpha = 0
     }
     
-    
+    var dismissResult = 0
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -118,6 +133,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         let summaryTap = UITapGestureRecognizer(target: self, action: #selector(self.handleSummaryTap(_:)))
+//        summaryTap.view?.tag = 101
 //        postSummary.addGestureRecognizer(summaryTap)
         adviseView.addGestureRecognizer(summaryTap)
         
@@ -133,6 +149,10 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         mainScrollView.addGestureRecognizer(scrollTap)
 //        mainScrollView.addGestureRecognizer(leftGesture)
 //        mainScrollView.addGestureRecognizer(rightGesture)
+        
+//        summaryTap.view?.tag = 102
+         let growthTap = UITapGestureRecognizer(target: self, action: #selector(self.handleGrowthTap(_:)))
+        accountGrowthCollectionView.addGestureRecognizer(growthTap)
         
         if self.user.user_id != 0 {
             indicator.startAnimating()
@@ -256,6 +276,19 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func handleSummaryTap(_ sender: UITapGestureRecognizer? = nil) {
+//        switch sender?.view?.tag {
+//        case 101:
+//            dismissResult = 1
+//        case 102:
+//            dismissResult = 2
+//        default:
+//            return
+//        }
+        dismissResult = 1
+        self.openCameraAndLibrary()
+    }
+    @objc func handleGrowthTap(_ sender: UITapGestureRecognizer? = nil) {
+        dismissResult = 2
         self.openCameraAndLibrary()
     }
     @objc func handleCustomTap(recognizer: CustomImageTapGesture) {
@@ -284,6 +317,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         default:
             return
         }
+        self.convertImageToAnalysed(image: customArray[imagePosition].imageData)
         print(imagePosition)
     }
 //    @objc func handleSwipeManual(_ sender: UISwipeGestureRecognizer) {
@@ -446,30 +480,96 @@ extension mainPageViewController: UIImagePickerControllerDelegate, UINavigationC
                 // request to analyse process on execute
                 self.webViewController.getTextFromPhoto(image: imageTaken) { [weak self] (text) in
                     let splitText = text.parsedResults[0].parsedText.components(separatedBy: "\r\n")
-                    var engage = "", reach = "", like = "", comment = ""
-                    for m in 0..<splitText.count {
-                        switch splitText[m] {
-                        case "Accounts reached":
-                            engage = splitText[m+1]
-                        case "Follows":
-                            reach = splitText[m-1]
-                        case "Profile Visits":
-                            like = splitText[m-2]
-                        case "Post Insights":
-                            comment = splitText[m+1]
-                        default:
-                            continue
+                    switch self?.dismissResult {
+                    case 1:
+                        var engage = "", reach = "", like = "", comment = ""
+                        for m in 0..<splitText.count {
+                            switch splitText[m] {
+                            case "Accounts reached":
+                                engage = splitText[m+1]
+                            case "Follows":
+                                reach = splitText[m-1]
+                            case "Profile Visits":
+                                like = splitText[m-2]
+                            case "Post Insights":
+                                comment = splitText[m+1]
+                            default:
+                                continue
+                            }
                         }
-                    }
-                    DispatchQueue.main.async {
-//                        self?.reachRate.text = engage
-//                        self?.discoveryCount.text = reach
-//                        self?.loveCount.text = like
-//                        self?.commentCount.text = comment
-                        self?.adviseText.text! = "Your Engage: \(engage)"
-                        self?.adviseText.text! += "\n Your Reach: \(reach)"
-                        self?.adviseText.text! += "\n Total Like: \(like)"
-                        self?.adviseText.text! += "\n Total Comment: \(comment)"
+                        DispatchQueue.main.async {
+//                            self?.reachRate.text = engage
+//                            self?.discoveryCount.text = reach
+//                            self?.loveCount.text = like
+//                            self?.commentCount.text = comment
+
+                            self?.adviseText.text! = "Your Engage: \(engage)"
+                            self?.adviseText.text! += "\n Your Reach: \(reach)"
+                            self?.adviseText.text! += "\n Total Like: \(like)"
+                            self?.adviseText.text! += "\n Total Comment: \(comment)"
+                        }
+                    case 2:
+//                        var following = "", labelFollowing = "", labelFollower = "", follower = "", labelPost = "", post = ""
+                        for q in 0..<splitText.count {
+                            let category = AccountGrowthCategory()
+                            switch splitText[q] {
+                                case "Following":
+                                category.id = 1
+                                category.imageCategory = self?.imageAccountGrowth[1]
+                                category.categoryName = splitText[q]
+                                category.categoryValue = splitText[q-1]
+                                self?.accountCategory[1] = category
+//                                    labelFollowing = splitText[q]
+//                                    following = splitText[q-1]
+                                case "Followers":
+//                                    labelFollower = splitText[q]
+//                                    follower = splitText[q-1]
+                                category.id = 0
+                                category.imageCategory = self?.imageAccountGrowth[0]
+                                category.categoryName = splitText[q]
+                                category.categoryValue = splitText[q-1]
+                                self?.accountCategory[0] = category
+                                case "Posts":
+//                                    labelPost = splitText[q]
+//                                    post = splitText[q-1]
+                                category.id = 2
+                                category.imageCategory = self?.imageAccountGrowth[2]
+                                category.categoryName = splitText[q]
+                                category.categoryValue = splitText[q-1]
+                                self?.accountCategory[2] = category
+                                default:
+                                continue
+                            }
+                        }
+                        DispatchQueue.main.async {
+                            self?.accountGrowthCollectionView.reloadData()
+                        }
+//                        let growthGroup = DispatchGroup()
+//                            growthGroup.enter()
+//                            var growthCount = 0
+//                            for cell in (self?.accountGrowthCollectionView.visibleCells as? [AccountGrowthCollectionViewCell])! {
+//                                    switch growthCount {
+//                                    case 1:
+//                                        cell.labelCategoryName.text = labelFollowing
+//                                        cell.labelCategoryValue.text = following
+//                                    case 0:
+//                                        cell.labelCategoryName.text = labelFollower
+//                                        cell.labelCategoryValue.text = follower
+//                                    case 2:
+//                                        cell.labelCategoryName.text = labelPost
+//                                        cell.labelCategoryValue.text = post
+//                                    default:
+//                                        return
+//                                    }
+//                                growthCount += 1
+//                           }
+//                            growthGroup.enter()
+//                        }
+//                        growthGroup.notify(queue: .main) {
+//                            self?.accountGrowthCollectionView.reloadData()
+//                        }
+                    default:
+                        return
                     }
                 }
             }
@@ -509,4 +609,49 @@ extension mainPageViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     
+}
+
+// MARK: Machine learning process goes here
+extension mainPageViewController {
+    func convertImageToAnalysed(image: UIImage) {
+        typeText.text = "Analysing.."
+        let imageProperty = CGImagePropertyOrientation(rawValue: UInt32(image.imageOrientation.rawValue)) // Convert from UIImage property to CoreImage Property -> UIImage >< CIImage, CIImage is format used by Vision
+        guard let ciImageTemporary = CIImage(image: image) else {
+            fatalError("Unable to create \(CIImage.self) from \(image).") // Convert failed
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            // Create under background thread with qos property, due to heavy task for image processing, so we try to avoid do this process under main / UI Thread to avoid leak or crash due to memory leak.
+            let handler = VNImageRequestHandler(ciImage: ciImageTemporary, orientation: imageProperty!) // create instance for the request Vision handler to process image processing
+            do {
+                try handler.perform([self.analyseRequest]) // perform request based on the handler and analyse it and update to UI under main thread
+            } catch {
+                print("Failed to perform.")
+            }
+        }
+    }
+    
+    // This part of Image Classification from CoreML to have a decision based on the model we use.
+    func processToAnalyse(for request: VNRequest, error: Error?) {
+        DispatchQueue.main.async {
+            guard let results = request.results else {
+                self.typeText.text = "Can not analyse the object."
+                return
+            }
+            let classifications = results as! [VNClassificationObservation] // create instance for observations returned by VNCoreMLRequest that using a model which is image classifier. A classifier produces set of array of classifications which are labels and confidence score.
+            if classifications.isEmpty {
+                self.typeText.text = "Nothing to analysed."
+            }else {
+                let importantInformation = classifications.prefix(2) // only get 2 top information from the results, which are the confidence value and identifier value
+//                let readableStringResult = importantInformation.map { (classification) in
+//                    return String(format: "(%.2f), %@", classification.confidence, classification.identifier) // Convert key value from classification result given by CoreML decision, to readable string
+//                }
+                let readableStringResult = importantInformation.map { (classification) in
+                    return String(format: "%@", classification.identifier) // Convert key value from classification result given by CoreML decision, to readable string
+                }
+//                self.typeText.text = readableStringResult.joined(separator: " | ")
+                self.typeText.text = readableStringResult[0]
+            }
+        }
+    }
 }
