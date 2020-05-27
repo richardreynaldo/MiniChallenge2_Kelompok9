@@ -22,6 +22,8 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var user = WebViewController.InstagramTestUser(access_token: "", user_id: 0)
     
+    var flag = 0
+    
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var joinedDate: UILabel!
 //    @IBOutlet weak var totalPhoto: UILabel!
@@ -57,6 +59,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func tutor1Button(_ sender: Any) {
         tutor1View.alpha = 0
         tutor3View.alpha = 1
+        flag += 1
     }
     @IBAction func skip1Button(_ sender: Any) {
         tutor1View.alpha = 0
@@ -95,7 +98,9 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
+        if(flag==0){
         tutor1View.alpha = 1
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
