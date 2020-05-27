@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A042982247EA6CD0018D51A /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A042981247EA6CD0018D51A /* PopUpView.swift */; };
+		5A042984247EA6D70018D51A /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A042983247EA6D70018D51A /* PopUpView.xib */; };
 		6D38C8922473DD1400616540 /* PostCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D38C8912473DD1400616540 /* PostCarousel.swift */; };
 		6D38C8972475003100616540 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D38C8962475003100616540 /* WebKit.framework */; };
 		6DAB8FD324630745003B5C54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAB8FD224630745003B5C54 /* AppDelegate.swift */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A042981247EA6CD0018D51A /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		5A042983247EA6D70018D51A /* PopUpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
 		6D38C8912473DD1400616540 /* PostCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCarousel.swift; sourceTree = "<group>"; };
 		6D38C8962475003100616540 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6DAB8FCF24630745003B5C54 /* MiniChallenge2_Kelompok9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChallenge2_Kelompok9.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +207,8 @@
 				955B927F247E34E2007F42BE /* Model */,
 				955B9279247E3445007F42BE /* Cell */,
 				6DEB679624713A5F00A85B4A /* mainPage.storyboard */,
+				5A042981247EA6CD0018D51A /* PopUpView.swift */,
+				5A042983247EA6D70018D51A /* PopUpView.xib */,
 				6DEB679C24713AFE00A85B4A /* mainPageViewController.swift */,
 				6D38C8912473DD1400616540 /* PostCarousel.swift */,
 			);
@@ -366,6 +372,7 @@
 				A1B4C8212470154F002FAD5C /* WebView.storyboard in Resources */,
 				B059727124714B1400508E9E /* detailPage.storyboard in Resources */,
 				B0A29B772464F21900032F91 /* Onboarding.storyboard in Resources */,
+				5A042984247EA6D70018D51A /* PopUpView.xib in Resources */,
 				A1B4C8262470243B002FAD5C /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +407,7 @@
 				955B9281247E34FB007F42BE /* AccountGrowthCategory.swift in Sources */,
 				6DAB8FD724630745003B5C54 /* ViewController.swift in Sources */,
 				B0A29B7B2464F8C300032F91 /* OnboardingVC.swift in Sources */,
+				5A042982247EA6CD0018D51A /* PopUpView.swift in Sources */,
 				6DAB8FDD24630745003B5C54 /* MiniChallenge2_Kelompok9.xcdatamodeld in Sources */,
 				B059727324714B3600508E9E /* detailPageViewController.swift in Sources */,
 				6DAB8FD324630745003B5C54 /* AppDelegate.swift in Sources */,
