@@ -328,18 +328,20 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navPage = segue.destination as! UINavigationController
-        let detailPage = navPage.topViewController as! detailPageViewController
-//            detailPage.selectedImage = selectImage
-        switch segue.identifier {
-        case "detailMain":
-            detailPage.selectedImage = customArray[imagePosition].imageData
-        case "detailNew":
-            detailPage.selectedImage = nil
-        default:
-            return
+        if segue.identifier != "settingNew" {
+            let navPage = segue.destination as! UINavigationController
+            let detailPage = navPage.topViewController as! detailPageViewController
+    //            detailPage.selectedImage = selectImage
+            switch segue.identifier {
+            case "detailMain":
+                detailPage.selectedImage = customArray[imagePosition].imageData
+            case "detailNew":
+                detailPage.selectedImage = nil
+            default:
+                return
+            }
+    //            detailPage.selectedImage = imageArray[imagePosition]
         }
-//            detailPage.selectedImage = imageArray[imagePosition]
         print(imagePosition)
     }
     
@@ -464,7 +466,7 @@ extension mainPageViewController: UIImagePickerControllerDelegate, UINavigationC
 //                        self?.discoveryCount.text = reach
 //                        self?.loveCount.text = like
 //                        self?.commentCount.text = comment
-                        self?.adviseText.text! += "\n Your Engage: \(engage)"
+                        self?.adviseText.text! = "Your Engage: \(engage)"
                         self?.adviseText.text! += "\n Your Reach: \(reach)"
                         self?.adviseText.text! += "\n Total Like: \(like)"
                         self?.adviseText.text! += "\n Total Comment: \(comment)"

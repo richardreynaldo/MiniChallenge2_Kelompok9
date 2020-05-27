@@ -43,7 +43,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="􀍟"/>
                                         <connections>
-                                            <segue destination="MEL-8h-Oj9" kind="show" id="Qhb-Lh-znV"/>
+                                            <segue destination="MEL-8h-Oj9" kind="show" identifier="settingNew" id="Qhb-Lh-znV"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cie-RL-UBR">
