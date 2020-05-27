@@ -160,9 +160,11 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
          let growthTap = UITapGestureRecognizer(target: self, action: #selector(self.handleGrowthTap(_:)))
         accountGrowthCollectionView.addGestureRecognizer(growthTap)
         
+        print("User id: \(self.user.user_id)")
         if self.user.user_id != 0 {
             indicator.startAnimating()
             self.webViewController.getInstagramUsername(testUserData: self.user) { [weak self] (username) in
+                print("Username: \(username.username)")
                 DispatchQueue.main.async {
                     self?.userName.text = username.username
                     self?.joinedDate.text = username.id
@@ -172,6 +174,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
             indicator.startAnimating()
             mediaGroup.enter()
             self.webViewController.getInstagramPostCaption(testUserData: self.user) { [weak self] (caption) in
+                print("Total Caption: \(caption.data.count)")
                 for k in 0..<caption.data.count {
                     if caption.data[k].mediaType == "IMAGE" {
                         self?.dataArray.append(caption.data[k])
@@ -304,7 +307,9 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         self.performSegue(withIdentifier: "detailMain", sender: self)
     }
     @IBAction func handleAnalyseButton(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "detailNew", sender: self)
+        
+//        self.performSegue(withIdentifier: "detailNew", sender: self)
+        self.convertImageToAnalysed(image: customArray[imagePosition].imageData)
     }
     @IBAction func handleImageSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender{
@@ -656,7 +661,9 @@ extension mainPageViewController {
                     return String(format: "%@", classification.identifier) // Convert key value from classification result given by CoreML decision, to readable string
                 }
 //                self.typeText.text = readableStringResult.joined(separator: " | ")
-                self.typeText.text = readableStringResult[0]
+                let betterString = readableStringResult[0].components(separatedBy: "_")
+                let typeString = betterString[1]
+                self.typeText.text = "Content Type: \(typeString[typeString.startIndex].uppercased())\(typeString.dropFirst())"
             }
         }
     }

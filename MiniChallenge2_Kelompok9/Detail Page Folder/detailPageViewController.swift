@@ -17,6 +17,7 @@ class detailPageViewController: UIViewController {
     
     @IBOutlet weak var uploadImage: UIImageView!
     @IBOutlet weak var uploadText: UILabel!
+    @IBOutlet weak var insightImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class detailPageViewController: UIViewController {
             uploadImage.image = #imageLiteral(resourceName: "upload photo")
         }
         let uploadTap = UITapGestureRecognizer(target: self, action: #selector(self.handleUploadTap(_:)))
-        uploadImage.addGestureRecognizer(uploadTap)
+        insightImage.addGestureRecognizer(uploadTap)
         // Do any additional setup after loading the view.
     }
     
@@ -80,7 +81,7 @@ extension detailPageViewController: UIImagePickerControllerDelegate, UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageTaken = info[.originalImage] as? UIImage {
             picker.dismiss(animated: true) {
-                self.uploadImage?.image = imageTaken
+                self.insightImage?.image = imageTaken
                 // request to analyse process on execute
                 self.webViewController.getTextFromPhoto(image: imageTaken) { [weak self] (text) in
                     let splitText = text.parsedResults[0].parsedText.components(separatedBy: "\r\n")
