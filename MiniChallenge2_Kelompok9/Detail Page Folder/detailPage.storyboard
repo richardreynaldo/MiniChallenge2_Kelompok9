@@ -44,6 +44,10 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="uploadImage" destination="oof-D4-dWu" id="fWq-rw-zql"/>
+                        <outlet property="uploadText" destination="9s4-2N-FaD" id="q9b-fx-P5e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ngm-w4-OEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

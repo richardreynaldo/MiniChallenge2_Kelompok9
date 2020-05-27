@@ -151,6 +151,9 @@
                                 <rect key="frame" x="103" y="637" width="208" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="analyse"/>
+                                <connections>
+                                    <action selector="handleAnalyseButton:" destination="VW9-fd-TVd" eventType="touchUpInside" id="Hi5-rd-qae"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -158,13 +161,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="dN3-7x-rc5"/>
                     <connections>
+                        <outlet property="adviseText" destination="y8Q-lb-pMc" id="8AV-XW-bAF"/>
+                        <outlet property="adviseView" destination="6ed-hC-VtU" id="v0Q-Wr-96m"/>
                         <outlet property="joinedDate" destination="vMu-Qo-LHQ" id="eLC-fd-Kbx"/>
                         <outlet property="leftScroll" destination="png-HS-zP6" id="SGK-pV-hiI"/>
                         <outlet property="mainScrollView" destination="uxQ-jm-XLe" id="DD1-Dc-UWR"/>
+                        <outlet property="manualButton" destination="uPS-bo-ffs" id="Xtc-jv-7o8"/>
                         <outlet property="profilePicture" destination="cie-RL-UBR" id="TAa-zg-6Ij"/>
                         <outlet property="rightScroll" destination="FGL-v5-mwe" id="TWY-nD-kWi"/>
+                        <outlet property="typeText" destination="WgR-0U-bE1" id="xRo-pa-crr"/>
                         <outlet property="userName" destination="Q4x-RO-nRJ" id="fKi-SD-Ewg"/>
                         <segue destination="3pY-lP-jhG" kind="show" identifier="detailMain" id="UHi-6d-UaC"/>
+                        <segue destination="AsN-c0-qDb" kind="presentation" identifier="detailNew" id="jIH-il-wjc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9v-FE-PLL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -181,7 +189,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1031.8840579710145" y="119.86607142857142"/>
+            <point key="canvasLocation" x="1019" y="133"/>
         </scene>
         <!--detailPage-->
         <scene sceneID="0lE-US-ZS2">
@@ -202,6 +210,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVA-Dk-HNF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1675" y="155"/>
+        </scene>
+        <!--detailPage-->
+        <scene sceneID="2iG-vE-HeA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="detailPage" id="AsN-c0-qDb" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QUd-eY-WiI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1619" y="264"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bsh-33-i4G">

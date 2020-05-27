@@ -24,16 +24,21 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var joinedDate: UILabel!
-    @IBOutlet weak var totalPhoto: UILabel!
+//    @IBOutlet weak var totalPhoto: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
-    @IBOutlet weak var discoveryCount: UILabel!
-    @IBOutlet weak var reachRate: UILabel!
-    @IBOutlet weak var loveCount: UILabel!
-    @IBOutlet weak var commentCount: UILabel!
-    @IBOutlet weak var postSummary: UIView!
+//    @IBOutlet weak var discoveryCount: UILabel!
+//    @IBOutlet weak var reachRate: UILabel!
+//    @IBOutlet weak var loveCount: UILabel!
+//    @IBOutlet weak var commentCount: UILabel!
+//    @IBOutlet weak var postSummary: UIView!
     @IBOutlet var leftScroll: UISwipeGestureRecognizer!
     @IBOutlet var rightScroll: UISwipeGestureRecognizer!
+    
+    @IBOutlet weak var manualButton: UIButton!
+    @IBOutlet weak var adviseView: UIView!
+    @IBOutlet weak var adviseText: UILabel!
+    @IBOutlet weak var typeText: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -60,7 +65,8 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         let summaryTap = UITapGestureRecognizer(target: self, action: #selector(self.handleSummaryTap(_:)))
-        postSummary.addGestureRecognizer(summaryTap)
+//        postSummary.addGestureRecognizer(summaryTap)
+        adviseView.addGestureRecognizer(summaryTap)
         
         let customTap = CustomImageTapGesture.init(target: self, action: #selector(handleCustomTap))
         
@@ -93,7 +99,8 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
                     }
                 }
                 DispatchQueue.main.async {
-                    self?.totalPhoto.text = "\(caption.data.count)"
+//                    self?.totalPhoto.text = "\(caption.data.count)"
+                    self?.typeText.text = "Your Total Photo: \(caption.data.count)"
                     indicator.stopAnimating()
                 }
                 mediaGroup.leave()
@@ -186,6 +193,9 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         selectImage = recognizer.imageTap?.image
         self.performSegue(withIdentifier: "detailMain", sender: self)
     }
+    @IBAction func handleAnalyseButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "detailNew", sender: self)
+    }
     @IBAction func handleImageSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender{
         case rightScroll:
@@ -247,14 +257,19 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailMain" {
-            let navPage = segue.destination as! UINavigationController
-            let detailPage = navPage.topViewController as! detailPageViewController
+        let navPage = segue.destination as! UINavigationController
+        let detailPage = navPage.topViewController as! detailPageViewController
 //            detailPage.selectedImage = selectImage
+        switch segue.identifier {
+        case "detailMain":
             detailPage.selectedImage = customArray[imagePosition].imageData
-//            detailPage.selectedImage = imageArray[imagePosition]
-            print(imagePosition)
+        case "detailNew":
+            detailPage.selectedImage = nil
+        default:
+            return
         }
+//            detailPage.selectedImage = imageArray[imagePosition]
+        print(imagePosition)
     }
     
     override func didReceiveMemoryWarning() {
@@ -374,10 +389,14 @@ extension mainPageViewController: UIImagePickerControllerDelegate, UINavigationC
                         }
                     }
                     DispatchQueue.main.async {
-                        self?.reachRate.text = engage
-                        self?.discoveryCount.text = reach
-                        self?.loveCount.text = like
-                        self?.commentCount.text = comment
+//                        self?.reachRate.text = engage
+//                        self?.discoveryCount.text = reach
+//                        self?.loveCount.text = like
+//                        self?.commentCount.text = comment
+                        self?.adviseText.text! += "\n Your Engage: \(engage)"
+                        self?.adviseText.text! += "\n Your Reach: \(reach)"
+                        self?.adviseText.text! += "\n Total Like: \(like)"
+                        self?.adviseText.text! += "\n Total Comment: \(comment)"
                     }
                 }
             }
