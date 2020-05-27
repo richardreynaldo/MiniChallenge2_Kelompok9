@@ -40,6 +40,16 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var adviseText: UILabel!
     @IBOutlet weak var typeText: UILabel!
     
+    //Define CollectionView and CollectionView ID
+    @IBOutlet weak var accountGrowthCollectionView: UICollectionView!
+    var accountGrowthCollectionViewId = "AccountGrowthCollectionViewCell"
+    var accountCategory = [AccountGrowthCategory]()
+    var imageAccountGrowth = ["followers icon", "profile visit icon", "total post icon" ]
+    var categoryNameAccountGrowth = ["Followers","Profile Visit","Total Post"]
+    var categoryValueAccountGrowth = ["26.7k", "40.1k", "100"]
+    //---------------------------------------------
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
@@ -182,6 +192,24 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         
 
         // Do any additional setup after loading the view.
+        
+        //Register Cell
+        let nibCell = UINib(nibName: accountGrowthCollectionViewId, bundle: nil)
+        accountGrowthCollectionView.register(nibCell, forCellWithReuseIdentifier: accountGrowthCollectionViewId)
+        //-------------------------------------------
+        
+        //Init Data
+        for j in 0...2{
+            let category = AccountGrowthCategory()
+            category.id = j
+            category.imageCategory = imageAccountGrowth[j]
+            category.categoryName = categoryNameAccountGrowth[j]
+            category.categoryValue = categoryValueAccountGrowth[j]
+            accountCategory.append(category)
+            
+        }
+        accountGrowthCollectionView.reloadData()
+        //---------------------------------
     }
     
     @objc func handleSummaryTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -402,4 +430,38 @@ extension mainPageViewController: UIImagePickerControllerDelegate, UINavigationC
             }
         }
     }
+}
+
+extension mainPageViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return accountCategory.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: accountGrowthCollectionViewId, for: indexPath) as! AccountGrowthCollectionViewCell
+        let category = accountCategory[indexPath.row]
+        cell.imageCategory.image = UIImage(named: category.imageCategory!)
+        cell.labelCategoryName.text = category.categoryName
+        cell.labelCategoryValue.text = category.categoryValue
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let inset: CGFloat = 10
+        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 120, height: 120)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let category = accountCategory[indexPath.row]
+        print("\(indexPath.row) - \(category.id)")
+    }
+    
+    
 }

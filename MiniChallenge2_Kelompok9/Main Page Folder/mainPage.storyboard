@@ -74,11 +74,11 @@
                                 <color key="textColor" red="0.28868225219999999" green="0.34901851420000002" blue="0.50982266659999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DLt-tQ-AdB">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DLt-tQ-AdB">
                                 <rect key="frame" x="19" y="729" width="374" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="K1I-b5-RO2">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="K1I-b5-RO2">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -94,6 +94,10 @@
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="VW9-fd-TVd" id="9Cd-rS-Y08"/>
+                                    <outlet property="delegate" destination="VW9-fd-TVd" id="VSu-tf-GGa"/>
+                                </connections>
                             </collectionView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uxQ-jm-XLe">
                                 <rect key="frame" x="0.0" y="206" width="414" height="212"/>
@@ -161,6 +165,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="dN3-7x-rc5"/>
                     <connections>
+                        <outlet property="accountGrowthCollectionView" destination="DLt-tQ-AdB" id="wzK-Qi-kc0"/>
                         <outlet property="adviseText" destination="y8Q-lb-pMc" id="8AV-XW-bAF"/>
                         <outlet property="adviseView" destination="6ed-hC-VtU" id="v0Q-Wr-96m"/>
                         <outlet property="joinedDate" destination="vMu-Qo-LHQ" id="eLC-fd-Kbx"/>
