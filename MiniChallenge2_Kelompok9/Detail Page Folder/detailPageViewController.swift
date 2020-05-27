@@ -100,7 +100,7 @@ extension detailPageViewController: UIImagePickerControllerDelegate, UINavigatio
                         }
                     }
                     DispatchQueue.main.async {
-                        self?.uploadText.text! += "\n Your Engage: \(engage)"
+                        self?.uploadText.text = "Your Engage: \(engage)"
                         self?.uploadText.text! += "\n Your Reach: \(reach)"
                         self?.uploadText.text! += "\n Total Like: \(like)"
                         self?.uploadText.text! += "\n Total Comment: \(comment)"
