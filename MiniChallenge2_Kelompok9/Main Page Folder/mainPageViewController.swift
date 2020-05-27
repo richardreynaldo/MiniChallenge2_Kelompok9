@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mainPageViewController: UIViewController {
+class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     @IBOutlet weak var mainScrollView: UIScrollView!
@@ -61,14 +61,19 @@ class mainPageViewController: UIViewController {
         
         let summaryTap = UITapGestureRecognizer(target: self, action: #selector(self.handleSummaryTap(_:)))
         postSummary.addGestureRecognizer(summaryTap)
+        
         let customTap = CustomImageTapGesture.init(target: self, action: #selector(handleCustomTap))
+        
         let scrollTap = UITapGestureRecognizer(target: self, action: #selector(self.handleScrollTap))
+//        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
+//        leftGesture.direction = .left
+//        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
+//        leftGesture.delegate = self
+//        rightGesture.delegate = self
+        scrollTap.delegate = self
         mainScrollView.addGestureRecognizer(scrollTap)
-        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
-        leftGesture.direction = .left
-        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
-        mainScrollView.addGestureRecognizer(leftGesture)
-        mainScrollView.addGestureRecognizer(rightGesture)
+//        mainScrollView.addGestureRecognizer(leftGesture)
+//        mainScrollView.addGestureRecognizer(rightGesture)
         
         if self.user.user_id != 0 {
             indicator.startAnimating()
@@ -118,19 +123,26 @@ class mainPageViewController: UIViewController {
                         let customSort = CustomImageSorting()
                         customSort.imageData = imageView?.image!
                         customSort.timestamp = picture.timestamp.toDate()
-                        if self?.customArray.count == 0 {
-                            self?.customArray.append(customSort)
-                        }else{
-                            for p in 0..<self!.customArray.count {
-                                if  (self?.customArray[p].timestamp)!.compare(customSort.timestamp!) == ComparisonResult.orderedAscending {
-                                    let temp = self?.customArray[p]
-                                    self?.customArray[p] = customSort
-                                    self?.customArray.append(temp!)
-                                }else{
-                                    self?.customArray.append(customSort)
-                                }
-                            }
-                        }
+                        let tempIdx = self?.customArray.insertionIndexOf(customSort) { $0.timestamp!.compare($1.timestamp!) == ComparisonResult.orderedDescending }
+                        self?.customArray.insert(customSort, at: tempIdx!)
+//                        if self?.customArray.count == 0 {
+//                            self?.imageArray.append(imageView!.image!)
+//                            self?.customArray.append(customSort)
+//                        }else{
+//                            for p in 0..<self!.customArray.count {
+//                                if  (self?.customArray[p].timestamp)!.compare(customSort.timestamp!) == ComparisonResult.orderedAscending {
+//                                    let temp = self?.customArray[p]
+//                                    self?.customArray[p] = customSort
+//                                    self?.customArray.append(temp!)
+//                                    let tmp = self?.imageArray[p]
+//                                    self?.imageArray[p] = imageView!.image!
+//                                    self?.imageArray.append(tmp!)
+//                                }else{
+//                                    self?.customArray.append(customSort)
+//                                    self?.imageArray.append(imageView!.image!)
+//                                }
+//                            }
+//                        }
 //                        self?.imageArray.append(imageView!.image!)
                         imageView?.contentMode = .scaleToFill
                         let xPosition = (self?.view.frame.width)! * CGFloat(j)
@@ -177,13 +189,39 @@ class mainPageViewController: UIViewController {
     @IBAction func handleImageSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender{
         case rightScroll:
-            imagePosition += 1
+            if imagePosition <= 0 {
+                imagePosition = 0
+            }else{
+                imagePosition -= 1
+            }
         case leftScroll:
-            imagePosition -= 1
+            if (imagePosition >= (customArray.count-1)) {
+                imagePosition = customArray.count - 1
+            }else {
+                imagePosition += 1
+            }
         default:
             return
         }
         print(imagePosition)
+    }
+//    @objc func handleSwipeManual(_ sender: UISwipeGestureRecognizer) {
+//        switch sender.direction{
+//        case UISwipeGestureRecognizer.Direction.right:
+//            imagePosition += 1
+//        case UISwipeGestureRecognizer.Direction.left:
+//            imagePosition -= 1
+//        default:
+//            return
+//        }
+//        print(imagePosition)
+//    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+
+//        if (gestureRecognizer == mainS.panRecognizer || gestureRecognizer == mainScene.pinchRecognizer) && otherGestureRecognizer == mainScene.tapRecognizer {
+        return true
+//        }
+//        return false
     }
     @objc func handleScrollTap(tap: UITapGestureRecognizer) {
         self.performSegue(withIdentifier: "detailMain", sender: self)
@@ -214,6 +252,7 @@ class mainPageViewController: UIViewController {
             let detailPage = navPage.topViewController as! detailPageViewController
 //            detailPage.selectedImage = selectImage
             detailPage.selectedImage = customArray[imagePosition].imageData
+//            detailPage.selectedImage = imageArray[imagePosition]
             print(imagePosition)
         }
     }
@@ -226,11 +265,11 @@ class mainPageViewController: UIViewController {
 }
 
 class CustomImageTapGesture: UITapGestureRecognizer {
-    var imageTap: UIImageView?
+    var imageTap: UIImageView!
 }
 
 class CustomImageSorting {
-    var imageData: UIImage?
+    var imageData: UIImage!
     var timestamp: Date?
 }
 
@@ -239,6 +278,24 @@ extension String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return formatter.date(from: self)
+    }
+}
+
+extension Array {
+    func insertionIndexOf(_ elem: Element, isOrderedBefore: (Element, Element) -> Bool) -> Int {
+        var lo = 0
+        var hi = self.count - 1
+        while lo <= hi {
+            let mid = (lo + hi)/2
+            if isOrderedBefore(self[mid], elem) {
+                lo = mid + 1
+            } else if isOrderedBefore(elem, self[mid]) {
+                hi = mid - 1
+            } else {
+                return mid // found at position mid
+            }
+        }
+        return lo // not found, would be inserted at position lo
     }
 }
 

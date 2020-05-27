@@ -216,11 +216,13 @@
                 <swipeGestureRecognizer direction="left" id="png-HS-zP6">
                     <connections>
                         <action selector="handleImageSwipe:" destination="VW9-fd-TVd" id="08s-xh-u53"/>
+                        <outlet property="delegate" destination="VW9-fd-TVd" id="Tzv-zr-m6m"/>
                     </connections>
                 </swipeGestureRecognizer>
                 <swipeGestureRecognizer direction="right" id="FGL-v5-mwe">
                     <connections>
                         <action selector="handleImageSwipe:" destination="VW9-fd-TVd" id="kVD-BN-SUf"/>
+                        <outlet property="delegate" destination="VW9-fd-TVd" id="X48-aZ-6Oh"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
