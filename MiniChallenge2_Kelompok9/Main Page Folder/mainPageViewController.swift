@@ -63,6 +63,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     @IBAction func skip1Button(_ sender: Any) {
         tutor1View.alpha = 0
+        flag += 1
     }
     @IBAction func tutor3Button(_ sender: Any) {
         tutor3View.alpha = 0
