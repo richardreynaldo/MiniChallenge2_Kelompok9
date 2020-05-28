@@ -662,8 +662,13 @@ extension mainPageViewController {
                 }
 //                self.typeText.text = readableStringResult.joined(separator: " | ")
                 let betterString = readableStringResult[0].components(separatedBy: "_")
+                if(betterString.count < 2 ){
+                self.typeText.text = "Content Type: -"
+                }else
+                {
                 let typeString = betterString[1]
                 self.typeText.text = "Content Type: \(typeString[typeString.startIndex].uppercased())\(typeString.dropFirst())"
+                }
             }
         }
     }
