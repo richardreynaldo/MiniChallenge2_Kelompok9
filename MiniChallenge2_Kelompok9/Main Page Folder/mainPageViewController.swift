@@ -671,11 +671,11 @@ extension mainPageViewController {
                     self.typeText.text = "Content Type: \(typeString[typeString.startIndex].uppercased())\(typeString.dropFirst())"
                     
                     switch typeString {
-                    case "testimonial":
+                    case "people":
                         self.adviseText.text = "A lot of people wonder about how your coffee quality, you should try to put more testimonial/ people/ somebody photo’s with your coffee to prove that they loved it"
                     case "tips" :
                         self.adviseText.text = "We suggest you to invest more on educational content that is related to coffee lover’s, or some trend such as COVID cleaning procedural to raise more engagement between followers"
-                    case "ucapan":
+                    case "greetings":
                         self.adviseText.text = "Make sure to keep all important date and try to make those greetings content for your social media"
                     case "infographic":
                         self.adviseText.text = "Your follower’s love infographic kind of content, you might need to consider to invest more on research about coffee and create those unique content with infographic package"
