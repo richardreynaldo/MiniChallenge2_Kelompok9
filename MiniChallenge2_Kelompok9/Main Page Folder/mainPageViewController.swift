@@ -11,20 +11,20 @@ import CoreML
 import Vision
 
 class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    
     // Create request to CoreML
-       lazy var analyseRequest: VNCoreMLRequest = {
-           do {
-               let model = try VNCoreMLModel(for: ContentType().model) // Initiate the ML Model to our request
-               let request = VNCoreMLRequest(model: model) { [weak self] (request, error) in
-                   self?.processToAnalyse(for: request, error: error) // Ask the machine to process evaluate the object request and give the result based on the ML Model.
-               }
-               request.imageCropAndScaleOption = .centerCrop
-               return request
-           } catch {
-               fatalError("Failed to load ML Model: \(error)")
-           }
-       }()
+    lazy var analyseRequest: VNCoreMLRequest = {
+        do {
+            let model = try VNCoreMLModel(for: ContentType().model) // Initiate the ML Model to our request
+            let request = VNCoreMLRequest(model: model) { [weak self] (request, error) in
+                self?.processToAnalyse(for: request, error: error) // Ask the machine to process evaluate the object request and give the result based on the ML Model.
+            }
+            request.imageCropAndScaleOption = .centerCrop
+            return request
+        } catch {
+            fatalError("Failed to load ML Model: \(error)")
+        }
+    }()
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     
@@ -41,7 +41,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var joinedDate: UILabel!
-//    @IBOutlet weak var totalPhoto: UILabel!
+    //    @IBOutlet weak var totalPhoto: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
     @IBOutlet var leftScroll: UISwipeGestureRecognizer!
@@ -115,10 +115,10 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
         if(flag==0){
-        tutor1View.alpha = 1
+            tutor1View.alpha = 1
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
@@ -127,7 +127,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
+        //        imageArray = [#imageLiteral(resourceName: "Hedgehog3"),#imageLiteral(resourceName: "Hedgehog1"),#imageLiteral(resourceName: "Hedgehog5")]
         dataArray = []
         customArray = []
         let mediaGroup = DispatchGroup()
@@ -139,25 +139,25 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         let summaryTap = UITapGestureRecognizer(target: self, action: #selector(self.handleSummaryTap(_:)))
-//        summaryTap.view?.tag = 101
-//        postSummary.addGestureRecognizer(summaryTap)
+        //        summaryTap.view?.tag = 101
+        //        postSummary.addGestureRecognizer(summaryTap)
         adviseView.addGestureRecognizer(summaryTap)
         
         let customTap = CustomImageTapGesture.init(target: self, action: #selector(handleCustomTap))
         
         let scrollTap = UITapGestureRecognizer(target: self, action: #selector(self.handleScrollTap))
-//        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
-//        leftGesture.direction = .left
-//        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
-//        leftGesture.delegate = self
-//        rightGesture.delegate = self
+        //        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
+        //        leftGesture.direction = .left
+        //        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipe(_:)))
+        //        leftGesture.delegate = self
+        //        rightGesture.delegate = self
         scrollTap.delegate = self
         mainScrollView.addGestureRecognizer(scrollTap)
-//        mainScrollView.addGestureRecognizer(leftGesture)
-//        mainScrollView.addGestureRecognizer(rightGesture)
+        //        mainScrollView.addGestureRecognizer(leftGesture)
+        //        mainScrollView.addGestureRecognizer(rightGesture)
         
-//        summaryTap.view?.tag = 102
-         let growthTap = UITapGestureRecognizer(target: self, action: #selector(self.handleGrowthTap(_:)))
+        //        summaryTap.view?.tag = 102
+        let growthTap = UITapGestureRecognizer(target: self, action: #selector(self.handleGrowthTap(_:)))
         accountGrowthCollectionView.addGestureRecognizer(growthTap)
         
         print("User id: \(self.user.user_id)")
@@ -181,7 +181,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
                     }
                 }
                 DispatchQueue.main.async {
-//                    self?.totalPhoto.text = "\(caption.data.count)"
+                    //                    self?.totalPhoto.text = "\(caption.data.count)"
                     self?.typeText.text = "Your Total Photo: \(caption.data.count)"
                     indicator.stopAnimating()
                 }
@@ -203,7 +203,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
                     DispatchQueue.main.async {
                         imageView = UIImageView()
                         imageView?.downloaded(from: picture.mediaURL, imageGroup: imageGroup)
-//                        imageGroup.leave()
+                        //                        imageGroup.leave()
                     }
                     imageGroup.notify(queue: .main) {
                         customTap.imageTap = imageView
@@ -214,25 +214,25 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
                         customSort.timestamp = picture.timestamp.toDate()
                         let tempIdx = self?.customArray.insertionIndexOf(customSort) { $0.timestamp!.compare($1.timestamp!) == ComparisonResult.orderedDescending }
                         self?.customArray.insert(customSort, at: tempIdx!)
-//                        if self?.customArray.count == 0 {
-//                            self?.imageArray.append(imageView!.image!)
-//                            self?.customArray.append(customSort)
-//                        }else{
-//                            for p in 0..<self!.customArray.count {
-//                                if  (self?.customArray[p].timestamp)!.compare(customSort.timestamp!) == ComparisonResult.orderedAscending {
-//                                    let temp = self?.customArray[p]
-//                                    self?.customArray[p] = customSort
-//                                    self?.customArray.append(temp!)
-//                                    let tmp = self?.imageArray[p]
-//                                    self?.imageArray[p] = imageView!.image!
-//                                    self?.imageArray.append(tmp!)
-//                                }else{
-//                                    self?.customArray.append(customSort)
-//                                    self?.imageArray.append(imageView!.image!)
-//                                }
-//                            }
-//                        }
-//                        self?.imageArray.append(imageView!.image!)
+                        //                        if self?.customArray.count == 0 {
+                        //                            self?.imageArray.append(imageView!.image!)
+                        //                            self?.customArray.append(customSort)
+                        //                        }else{
+                        //                            for p in 0..<self!.customArray.count {
+                        //                                if  (self?.customArray[p].timestamp)!.compare(customSort.timestamp!) == ComparisonResult.orderedAscending {
+                        //                                    let temp = self?.customArray[p]
+                        //                                    self?.customArray[p] = customSort
+                        //                                    self?.customArray.append(temp!)
+                        //                                    let tmp = self?.imageArray[p]
+                        //                                    self?.imageArray[p] = imageView!.image!
+                        //                                    self?.imageArray.append(tmp!)
+                        //                                }else{
+                        //                                    self?.customArray.append(customSort)
+                        //                                    self?.imageArray.append(imageView!.image!)
+                        //                                }
+                        //                            }
+                        //                        }
+                        //                        self?.imageArray.append(imageView!.image!)
                         imageView?.contentMode = .scaleToFill
                         let xPosition = (self?.view.frame.width)! * CGFloat(j)
                         imageView?.frame = CGRect(x: xPosition, y: 0, width: (self?.mainScrollView.frame.width)!, height: (self?.mainScrollView.frame.height)!)            
@@ -246,23 +246,23 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
-//        print(self.mediaArray)
+        //        print(self.mediaArray)
         
-//        mainScrollView.isPagingEnabled = true
-//
-//        for i in 0..<imageArray.count {
-//            let imageView = UIImageView()
-//            imageView.image = imageArray[i]
-//            imageView.contentMode = .scaleToFill
-//            let xPosition = self.view.frame.width * CGFloat(i)
-//            imageView.frame = CGRect(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
-//
-//            mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat( i + 1)
-//            mainScrollView.addSubview(imageView)
-//        }
+        //        mainScrollView.isPagingEnabled = true
+        //
+        //        for i in 0..<imageArray.count {
+        //            let imageView = UIImageView()
+        //            imageView.image = imageArray[i]
+        //            imageView.contentMode = .scaleToFill
+        //            let xPosition = self.view.frame.width * CGFloat(i)
+        //            imageView.frame = CGRect(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+        //
+        //            mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat( i + 1)
+        //            mainScrollView.addSubview(imageView)
+        //        }
         
         
-
+        
         // Do any additional setup after loading the view.
         
         //Register Cell
@@ -285,14 +285,14 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func handleSummaryTap(_ sender: UITapGestureRecognizer? = nil) {
-//        switch sender?.view?.tag {
-//        case 101:
-//            dismissResult = 1
-//        case 102:
-//            dismissResult = 2
-//        default:
-//            return
-//        }
+        //        switch sender?.view?.tag {
+        //        case 101:
+        //            dismissResult = 1
+        //        case 102:
+        //            dismissResult = 2
+        //        default:
+        //            return
+        //        }
         dismissResult = 1
         self.openCameraAndLibrary()
     }
@@ -308,7 +308,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     @IBAction func handleAnalyseButton(_ sender: UIButton) {
         
-//        self.performSegue(withIdentifier: "detailNew", sender: self)
+        //        self.performSegue(withIdentifier: "detailNew", sender: self)
         self.convertImageToAnalysed(image: customArray[imagePosition].imageData)
     }
     @IBAction func handleImageSwipe(_ sender: UISwipeGestureRecognizer) {
@@ -331,52 +331,52 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
         self.convertImageToAnalysed(image: customArray[imagePosition].imageData)
         print(imagePosition)
     }
-//    @objc func handleSwipeManual(_ sender: UISwipeGestureRecognizer) {
-//        switch sender.direction{
-//        case UISwipeGestureRecognizer.Direction.right:
-//            imagePosition += 1
-//        case UISwipeGestureRecognizer.Direction.left:
-//            imagePosition -= 1
-//        default:
-//            return
-//        }
-//        print(imagePosition)
-//    }
+    //    @objc func handleSwipeManual(_ sender: UISwipeGestureRecognizer) {
+    //        switch sender.direction{
+    //        case UISwipeGestureRecognizer.Direction.right:
+    //            imagePosition += 1
+    //        case UISwipeGestureRecognizer.Direction.left:
+    //            imagePosition -= 1
+    //        default:
+    //            return
+    //        }
+    //        print(imagePosition)
+    //    }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-
-//        if (gestureRecognizer == mainS.panRecognizer || gestureRecognizer == mainScene.pinchRecognizer) && otherGestureRecognizer == mainScene.tapRecognizer {
+        
+        //        if (gestureRecognizer == mainS.panRecognizer || gestureRecognizer == mainScene.pinchRecognizer) && otherGestureRecognizer == mainScene.tapRecognizer {
         return true
-//        }
-//        return false
+        //        }
+        //        return false
     }
     @objc func handleScrollTap(tap: UITapGestureRecognizer) {
         self.performSegue(withIdentifier: "detailMain", sender: self)
-//        let location = tap.location(in: tap.view)
+        //        let location = tap.location(in: tap.view)
         // get the tag for the clicked imageView
-//        guard let tag = tap.view?.tag else { return }
-
-//        for n in 0..<mainScrollView.subviews.count{
-//            let subViewTapped = mainScrollView.subviews[n]
-//            if subViewTapped.frame.contains(location) {
+        //        guard let tag = tap.view?.tag else { return }
+        
+        //        for n in 0..<mainScrollView.subviews.count{
+        //            let subViewTapped = mainScrollView.subviews[n]
+        //            if subViewTapped.frame.contains(location) {
         // iterate through your scrollViews subviews
-           // and check if it´s an imageView
-//           for case let imageView as UIImageView in mainScrollView.subviews {
-               // check if the tag matches the clicked tag
-//               if imageView.tag == tag {
-                   // this is the tag the user has clicked on
-                   // highlight it here
-//                selectImage = imageView.image
-//                print("tapped subview at index\(n)")
-                // do your stuff here
-//            }
-//        }
+        // and check if it´s an imageView
+        //           for case let imageView as UIImageView in mainScrollView.subviews {
+        // check if the tag matches the clicked tag
+        //               if imageView.tag == tag {
+        // this is the tag the user has clicked on
+        // highlight it here
+        //                selectImage = imageView.image
+        //                print("tapped subview at index\(n)")
+        // do your stuff here
+        //            }
+        //        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "settingNew" {
             let navPage = segue.destination as! UINavigationController
             let detailPage = navPage.topViewController as! detailPageViewController
-    //            detailPage.selectedImage = selectImage
+            //            detailPage.selectedImage = selectImage
             switch segue.identifier {
             case "detailMain":
                 detailPage.selectedImage = customArray[imagePosition].imageData
@@ -385,7 +385,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
             default:
                 return
             }
-    //            detailPage.selectedImage = imageArray[imagePosition]
+            //            detailPage.selectedImage = imageArray[imagePosition]
         }
         print(imagePosition)
     }
@@ -509,76 +509,76 @@ extension mainPageViewController: UIImagePickerControllerDelegate, UINavigationC
                             }
                         }
                         DispatchQueue.main.async {
-//                            self?.reachRate.text = engage
-//                            self?.discoveryCount.text = reach
-//                            self?.loveCount.text = like
-//                            self?.commentCount.text = comment
-
+                            //                            self?.reachRate.text = engage
+                            //                            self?.discoveryCount.text = reach
+                            //                            self?.loveCount.text = like
+                            //                            self?.commentCount.text = comment
+                            
                             self?.adviseText.text! = "Your Engage: \(engage)"
                             self?.adviseText.text! += "\n Your Reach: \(reach)"
                             self?.adviseText.text! += "\n Total Like: \(like)"
                             self?.adviseText.text! += "\n Total Comment: \(comment)"
                         }
                     case 2:
-//                        var following = "", labelFollowing = "", labelFollower = "", follower = "", labelPost = "", post = ""
+                        //                        var following = "", labelFollowing = "", labelFollower = "", follower = "", labelPost = "", post = ""
                         for q in 0..<splitText.count {
                             let category = AccountGrowthCategory()
                             switch splitText[q] {
-                                case "Following":
+                            case "Following":
                                 category.id = 1
                                 category.imageCategory = self?.imageAccountGrowth[1]
                                 category.categoryName = splitText[q]
                                 category.categoryValue = splitText[q-1]
                                 self?.accountCategory[1] = category
-//                                    labelFollowing = splitText[q]
-//                                    following = splitText[q-1]
-                                case "Followers":
-//                                    labelFollower = splitText[q]
-//                                    follower = splitText[q-1]
+                                //                                    labelFollowing = splitText[q]
+                            //                                    following = splitText[q-1]
+                            case "Followers":
+                                //                                    labelFollower = splitText[q]
+                                //                                    follower = splitText[q-1]
                                 category.id = 0
                                 category.imageCategory = self?.imageAccountGrowth[0]
                                 category.categoryName = splitText[q]
                                 category.categoryValue = splitText[q-1]
                                 self?.accountCategory[0] = category
-                                case "Posts":
-//                                    labelPost = splitText[q]
-//                                    post = splitText[q-1]
+                            case "Posts":
+                                //                                    labelPost = splitText[q]
+                                //                                    post = splitText[q-1]
                                 category.id = 2
                                 category.imageCategory = self?.imageAccountGrowth[2]
                                 category.categoryName = splitText[q]
                                 category.categoryValue = splitText[q-1]
                                 self?.accountCategory[2] = category
-                                default:
+                            default:
                                 continue
                             }
                         }
                         DispatchQueue.main.async {
                             self?.accountGrowthCollectionView.reloadData()
                         }
-//                        let growthGroup = DispatchGroup()
-//                            growthGroup.enter()
-//                            var growthCount = 0
-//                            for cell in (self?.accountGrowthCollectionView.visibleCells as? [AccountGrowthCollectionViewCell])! {
-//                                    switch growthCount {
-//                                    case 1:
-//                                        cell.labelCategoryName.text = labelFollowing
-//                                        cell.labelCategoryValue.text = following
-//                                    case 0:
-//                                        cell.labelCategoryName.text = labelFollower
-//                                        cell.labelCategoryValue.text = follower
-//                                    case 2:
-//                                        cell.labelCategoryName.text = labelPost
-//                                        cell.labelCategoryValue.text = post
-//                                    default:
-//                                        return
-//                                    }
-//                                growthCount += 1
-//                           }
-//                            growthGroup.enter()
-//                        }
-//                        growthGroup.notify(queue: .main) {
-//                            self?.accountGrowthCollectionView.reloadData()
-//                        }
+                        //                        let growthGroup = DispatchGroup()
+                        //                            growthGroup.enter()
+                        //                            var growthCount = 0
+                        //                            for cell in (self?.accountGrowthCollectionView.visibleCells as? [AccountGrowthCollectionViewCell])! {
+                        //                                    switch growthCount {
+                        //                                    case 1:
+                        //                                        cell.labelCategoryName.text = labelFollowing
+                        //                                        cell.labelCategoryValue.text = following
+                        //                                    case 0:
+                        //                                        cell.labelCategoryName.text = labelFollower
+                        //                                        cell.labelCategoryValue.text = follower
+                        //                                    case 2:
+                        //                                        cell.labelCategoryName.text = labelPost
+                        //                                        cell.labelCategoryValue.text = post
+                        //                                    default:
+                        //                                        return
+                        //                                    }
+                        //                                growthCount += 1
+                        //                           }
+                        //                            growthGroup.enter()
+                        //                        }
+                        //                        growthGroup.notify(queue: .main) {
+                        //                            self?.accountGrowthCollectionView.reloadData()
+                    //                        }
                     default:
                         return
                     }
@@ -654,20 +654,44 @@ extension mainPageViewController {
                 self.typeText.text = "Nothing to analysed."
             }else {
                 let importantInformation = classifications.prefix(2) // only get 2 top information from the results, which are the confidence value and identifier value
-//                let readableStringResult = importantInformation.map { (classification) in
-//                    return String(format: "(%.2f), %@", classification.confidence, classification.identifier) // Convert key value from classification result given by CoreML decision, to readable string
-//                }
+                //                let readableStringResult = importantInformation.map { (classification) in
+                //                    return String(format: "(%.2f), %@", classification.confidence, classification.identifier) // Convert key value from classification result given by CoreML decision, to readable string
+                //                }
                 let readableStringResult = importantInformation.map { (classification) in
                     return String(format: "%@", classification.identifier) // Convert key value from classification result given by CoreML decision, to readable string
                 }
-//                self.typeText.text = readableStringResult.joined(separator: " | ")
+                //                self.typeText.text = readableStringResult.joined(separator: " | ")
                 let betterString = readableStringResult[0].components(separatedBy: "_")
                 if(betterString.count < 2 ){
-                self.typeText.text = "Content Type: -"
+                    self.typeText.text = "Content Type: -"
+                    self.adviseText.text = "No advise can be given"
                 }else
                 {
-                let typeString = betterString[1]
-                self.typeText.text = "Content Type: \(typeString[typeString.startIndex].uppercased())\(typeString.dropFirst())"
+                    let typeString = betterString[1]
+                    self.typeText.text = "Content Type: \(typeString[typeString.startIndex].uppercased())\(typeString.dropFirst())"
+                    
+                    switch typeString {
+                    case "testimonial":
+                        self.adviseText.text = "A lot of people wonder about how your coffee quality, you should try to put more testimonial/ people/ somebody photo’s with your coffee to prove that they loved it"
+                    case "tips" :
+                        self.adviseText.text = "We suggest you to invest more on educational content that is related to coffee lover’s, or some trend such as COVID cleaning procedural to raise more engagement between followers"
+                    case "ucapan":
+                        self.adviseText.text = "Make sure to keep all important date and try to make those greetings content for your social media"
+                    case "infographic":
+                        self.adviseText.text = "Your follower’s love infographic kind of content, you might need to consider to invest more on research about coffee and create those unique content with infographic package"
+                    case "product":
+                        self.adviseText.text = "People love to see your product, you might want to consider to put more of your product photo’s with different angle as your daily content"
+                    case "promotion":
+                        self.adviseText.text = "People are seeking for your promotion, they are waiting for your promotional content, just keep up your design in promotion stuff, and try to make a strategy to keep the price as much profit for your shop"
+                    case "quiz":
+                        self.adviseText.text = "People like to engage with you using a quiz/ giveaway stuff. You might want to consider to giveaway some of your coffee for free just by answering some trivia question about your coffee shop using social media content daily at least once a week"
+                    case "quotes":
+                        self.adviseText.text = "Your followers kind a edgy, they love your quotes, keep finding a quotes for your daily content to raise your engagement rate with your followers"
+                    default:
+                        self.adviseText.text = "No advise can be given"
+                    }
+                    
+                    
                 }
             }
         }
