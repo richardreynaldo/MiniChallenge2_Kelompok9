@@ -158,6 +158,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="analyse new"/>
                                 <connections>
+                                    <action selector="analyze:" destination="VW9-fd-TVd" eventType="touchUpInside" id="UKQ-lu-VOe"/>
                                     <action selector="handleAnalyseButton:" destination="VW9-fd-TVd" eventType="touchUpInside" id="Hi5-rd-qae"/>
                                 </connections>
                             </button>

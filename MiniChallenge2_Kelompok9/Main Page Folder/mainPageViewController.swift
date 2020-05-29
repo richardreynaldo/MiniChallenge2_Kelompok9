@@ -111,6 +111,14 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var dismissResult = 0
     
+    @IBAction func analyze(_ sender: Any) {
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false){_ in
+                           self.adviseText.text = "People are seeking for your promotion, they are waiting for your promotional content, just keep up your design in promotion stuff, and try to make a strategy to keep the price as much profit for your shop"
+                           
+                       }
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
@@ -380,10 +388,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
             switch segue.identifier {
             case "detailMain":
                 detailPage.selectedImage = customArray[imagePosition].imageData
-                Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false){_ in 
-                    self.adviseText.text = "People are seeking for your promotion, they are waiting for your promotional content, just keep up your design in promotion stuff, and try to make a strategy to keep the price as much profit for your shop"
-                    
-                }
+               
                 case "detailNew":
                 detailPage.selectedImage = nil
             default:
