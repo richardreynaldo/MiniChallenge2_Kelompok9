@@ -35,7 +35,9 @@ class detailPageViewController: UIViewController {
     }
     
     @IBAction func dismissModal(_ sender: Any) {
+        
         self.presentingViewController?.dismiss(animated: true, completion: nil)
+        
         
     }
     
