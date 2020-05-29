@@ -380,6 +380,7 @@ class mainPageViewController: UIViewController, UIGestureRecognizerDelegate {
             switch segue.identifier {
             case "detailMain":
                 detailPage.selectedImage = customArray[imagePosition].imageData
+                adviseText.text = "People are seeking for your promotion, they are waiting for your promotional content, just keep up your design in promotion stuff, and try to make a strategy to keep the price as much profit for your shop"
             case "detailNew":
                 detailPage.selectedImage = nil
             default:
@@ -670,26 +671,26 @@ extension mainPageViewController {
                     let typeString = betterString[1]
                     self.typeText.text = "Content Type: \(typeString[typeString.startIndex].uppercased())\(typeString.dropFirst())"
                     
-                    switch typeString {
-                    case "people":
-                        self.adviseText.text = "A lot of people wonder about how your coffee quality, you should try to put more testimonial/ people/ somebody photo’s with your coffee to prove that they loved it"
-                    case "tips" :
-                        self.adviseText.text = "We suggest you to invest more on educational content that is related to coffee lover’s, or some trend such as COVID cleaning procedural to raise more engagement between followers"
-                    case "greetings":
-                        self.adviseText.text = "Make sure to keep all important date and try to make those greetings content for your social media"
-                    case "infographic":
-                        self.adviseText.text = "Your follower’s love infographic kind of content, you might need to consider to invest more on research about coffee and create those unique content with infographic package"
-                    case "product":
-                        self.adviseText.text = "People love to see your product, you might want to consider to put more of your product photo’s with different angle as your daily content"
-                    case "promotion":
-                        self.adviseText.text = "People are seeking for your promotion, they are waiting for your promotional content, just keep up your design in promotion stuff, and try to make a strategy to keep the price as much profit for your shop"
-                    case "quiz":
-                        self.adviseText.text = "People like to engage with you using a quiz/ giveaway stuff. You might want to consider to giveaway some of your coffee for free just by answering some trivia question about your coffee shop using social media content daily at least once a week"
-                    case "quotes":
-                        self.adviseText.text = "Your followers kind a edgy, they love your quotes, keep finding a quotes for your daily content to raise your engagement rate with your followers"
-                    default:
-                        self.adviseText.text = "No advise can be given"
-                    }
+//                    switch typeString {
+//                    case "people":
+//                        self.adviseText.text = "A lot of people wonder about how your coffee quality, you should try to put more testimonial/ people/ somebody photo’s with your coffee to prove that they loved it"
+//                    case "tips" :
+//                        self.adviseText.text = "We suggest you to invest more on educational content that is related to coffee lover’s, or some trend such as COVID cleaning procedural to raise more engagement between followers"
+//                    case "greetings":
+//                        self.adviseText.text = "Make sure to keep all important date and try to make those greetings content for your social media"
+//                    case "infographic":
+//                        self.adviseText.text = "Your follower’s love infographic kind of content, you might need to consider to invest more on research about coffee and create those unique content with infographic package"
+//                    case "product":
+//                        self.adviseText.text = "People love to see your product, you might want to consider to put more of your product photo’s with different angle as your daily content"
+//                    case "promotion":
+//                        self.adviseText.text = "People are seeking for your promotion, they are waiting for your promotional content, just keep up your design in promotion stuff, and try to make a strategy to keep the price as much profit for your shop"
+//                    case "quiz":
+//                        self.adviseText.text = "People like to engage with you using a quiz/ giveaway stuff. You might want to consider to giveaway some of your coffee for free just by answering some trivia question about your coffee shop using social media content daily at least once a week"
+//                    case "quotes":
+//                        self.adviseText.text = "Your followers kind a edgy, they love your quotes, keep finding a quotes for your daily content to raise your engagement rate with your followers"
+//                    default:
+//                        self.adviseText.text = "No advise can be given"
+//                    }
                     
                     
                 }

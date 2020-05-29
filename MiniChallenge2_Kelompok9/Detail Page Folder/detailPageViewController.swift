@@ -18,6 +18,7 @@ class detailPageViewController: UIViewController {
     @IBOutlet weak var uploadImage: UIImageView!
     @IBOutlet weak var uploadText: UILabel!
     @IBOutlet weak var insightImage: UIImageView!
+    @IBOutlet weak var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,13 @@ class detailPageViewController: UIViewController {
         insightImage.addGestureRecognizer(uploadTap)
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func dismissModal(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
     
     @objc func handleUploadTap(_ sender: UITapGestureRecognizer? = nil) {
         self.openCameraAndLibrary()

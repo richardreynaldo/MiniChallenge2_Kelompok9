@@ -19,12 +19,15 @@
                                 <rect key="frame" x="42" y="685" width="333" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="save"/>
+                                <connections>
+                                    <action selector="dismissModal:" destination="lCY-rj-MQY" eventType="touchUpInside" id="BXF-29-Zqn"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="upload photo" translatesAutoresizingMaskIntoConstraints="NO" id="oof-D4-dWu">
                                 <rect key="frame" x="123" y="119" width="170" height="169"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s4-2N-FaD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s4-2N-FaD">
                                 <rect key="frame" x="66" y="314" width="282" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">Upload a screen shot of this post’s insight to 
@@ -44,6 +47,7 @@ get your advise</string>
                     <navigationItem key="navigationItem" title="Performance" id="b8a-TE-ia6"/>
                     <connections>
                         <outlet property="insightImage" destination="z3g-i7-Nz8" id="n1y-qb-2GW"/>
+                        <outlet property="saveButton" destination="6Ae-gx-A2J" id="lYc-dk-uPh"/>
                         <outlet property="uploadImage" destination="oof-D4-dWu" id="fWq-rw-zql"/>
                         <outlet property="uploadText" destination="9s4-2N-FaD" id="q9b-fx-P5e"/>
                     </connections>
