@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TuM-Lp-afF">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Web View Controller-->
+        <scene sceneID="Fke-UZ-2Ff">
+            <objects>
+                <viewController id="TuM-Lp-afF" customClass="WebViewController" customModule="MiniChallenge2_Kelompok9" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gHl-AQ-jXx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="atf-N4-hiy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Uvh-sc-PYB" firstAttribute="trailing" secondItem="atf-N4-hiy" secondAttribute="trailing" id="Elo-Im-ten"/>
+                            <constraint firstItem="atf-N4-hiy" firstAttribute="leading" secondItem="Uvh-sc-PYB" secondAttribute="leading" id="L5p-25-iNc"/>
+                            <constraint firstItem="atf-N4-hiy" firstAttribute="top" secondItem="Uvh-sc-PYB" secondAttribute="top" id="R10-tx-neL"/>
+                            <constraint firstItem="atf-N4-hiy" firstAttribute="bottom" secondItem="Uvh-sc-PYB" secondAttribute="bottom" id="u2t-p4-QwW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Uvh-sc-PYB"/>
+                    </view>
+                    <connections>
+                        <outlet property="popWeb" destination="atf-N4-hiy" id="i9o-xB-CsG"/>
+                        <segue destination="Ypg-8b-58C" kind="modal" identifier="webMain" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="Kmb-Zb-UQy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fXB-UQ-ipn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="183" y="68"/>
+        </scene>
+        <!--mainPage-->
+        <scene sceneID="PZf-qH-4N0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="mainPage" id="Ypg-8b-58C" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3Uy-aN-TrE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hex-Jd-8wy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853" y="99"/>
+        </scene>
+    </scenes>
+</document>
